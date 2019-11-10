@@ -1,0 +1,112 @@
+*
+{
+    box-sizing: border-box;
+}
+
+form.example input[type=text] 
+{
+    padding: 10px;
+    font-size: 17px;
+    border: 1px solid grey;
+    float: left;
+    background: #f1f1f1;
+}
+
+form.example button 
+{
+    float: left;
+    width: 20%;
+    padding: 10px;
+    background: #2196F3;
+    color: white;
+    font-size: 17px;
+    border: 1px solid grey;
+    border-left: none;
+    cursor: pointer;
+}
+
+form.example button:hover
+{
+    background: #0b7dda;
+}
+  
+
+.cardMenu
+{
+	display:none;
+	z-index:100;
+}
+
+menu 
+{
+	position:absolute;
+	display:block;
+	left:0px;
+	top:0px;
+	height:20px;
+	width:20px;
+	padding:0;
+	margin:0;
+	border:1px solid;
+	background-color:#191919;
+	font-weight:normal;
+	white-space:nowrap;
+}
+
+menu:hover
+{
+	background-color:#101010;
+	font-weight:bold;
+}
+
+menu:hover > menu
+{
+	display:block;
+}
+
+menu > menu
+{
+	display:none;
+	position:relative;
+	top:-20px;
+	left:100%;
+	width:55px;
+}
+
+menu[title]:before
+{
+	content:attr(title);
+}
+
+menu:not([title]):before
+{
+	content:"\2630";
+}
+
+
+.upload-btn-wrapper 
+{
+    position: relative;
+    overflow: hidden;
+    display: inline-block;
+}
+
+.btn 
+{
+    border: 2px solid gray;
+    color: gray;
+    background-color: white;
+    padding: 4px 10px;
+    border-radius: 8px;
+    font-size: 10px;
+    font-weight: bold;
+}
+  
+.upload-btn-wrapper input[type=file] 
+{
+    font-size: 100px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    opacity: 0;
+}

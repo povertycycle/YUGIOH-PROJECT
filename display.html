@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script type="text/javascript" src="./node.js"></script>
+</head>
+
+<body style="background: #353535; font-size: 10px; font-family: 'Roboto';" text='white'>
+    <table>
+        <tr>
+            <td>
+                <form class="example" onsubmit="return false">
+                    <input type="text" id="searchBar" name="search">
+                    <button type="submit" id="searchBarButton" onclick="searchCards()"><i class="fa fa-search"></i></button>
+                </form>
+                <div id="cardListDisplayer"></div>
+            </td>
+            <td>
+                <div>
+                    <img id="cardDisplayer"></img>
+                </div>
+            </td>
+            <td style="display: block;">
+                <div id="optionList">
+                    <button class="btn" id="makeNewDeckButton" onclick="makeDeck()">Create deck</button>
+                    <div class="upload-btn-wrapper">
+                        <button class="btn" id="uploadDeck">Upload a deck</button>
+                        <input type="file" name="myfile" onchange="handleFile(this.files)"/>
+                    </div>
+                    <button class="btn" id="saveDeck" onclick="saveDeck()">Save deck</button>
+                    <div>
+                        <button class="btn" for="filename" id="downloadDeck" onclick="downloadDeck()">Download deck</button><a id="download" download="" href=""></a>
+                        <div class="shape"></div>
+                    </div>
+                    
+                    <div id="deckList"></div>
+                </div>
+                
+            </td>
+            <td>
+                <div id="deckContentContainer">
+                    <div id="deckContent"></div>
+                </div>
+            </td>
+        </tr>
+    </table>
+    <menu id="cardMenu" class="cardMenu">
+        <menu title="Add Card" onclick="addToDeck()"></menu>
+    </menu>
+</body>
+<script type="text/javascript" src="globalVariable.js"></script>
+<script type="text/javascript" src="cardFetcher.js"></script>
+<script type="text/javascript" src="mainDisplayer.js"></script>
+<script type="text/javascript" src="userInterface.js"></script>
+
+</html>
