@@ -11,7 +11,9 @@ var DECK_LIST = document.getElementById("deckList");
 var DECK_CONTENT = document.getElementById("deckContent");
 var DECK_CONTENT_CONTAINER = document.getElementById("deckContentContainer");
 var CARD_MENU = document.getElementById("cardMenu");
+var DECK_MENU = document.getElementById("deckMenu");
 var OPTION_LIST = document.getElementById("optionList");
+var DECK_CARD_IMAGE = document.getElementById("deckCardDisplayer");
 
 var SELECTED_DECK;
 var SELECTED_DECK_NAME;
@@ -66,10 +68,14 @@ var OPTION_LIST_WIDTH = 100;
 var CARD_LIST_DISPLAYER_HEIGHT = window.innerHeight - 30;
 var DECK_CONTENT_WIDTH = 600;
 var DECK_CONTENT_HEIGHT = 2000;
+var BORDER_RADIUS = 1;
 
 var DEFAULT_BACKGROUND_COLOR = "#191919";
 
 var request = new XMLHttpRequest();
-var deckRequest = new XMLHttpRequest();
+var DECK_REQUEST = new XMLHttpRequest();
+var ALL_LOCAL_DECKS = 100;
+var LOCAL_DECK = 101;
+var DOWNLOAD_DECK = 200;
 
 var PROCESS_DONE = false;

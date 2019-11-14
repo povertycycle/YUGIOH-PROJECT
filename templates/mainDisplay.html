@@ -3,11 +3,10 @@
 
 <head>
     <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="static/style.css">
     <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <script type="text/javascript" src="./node.js"></script>
 </head>
 
 <body style="background: #353535; font-size: 10px; font-family: 'Roboto';" text='white'>
@@ -20,12 +19,13 @@
                 </form>
                 <div id="cardListDisplayer"></div>
             </td>
-            <td>
+            <td style="display: block;">
                 <div>
                     <img id="cardDisplayer"></img>
+                    <img id="deckCardDisplayer"></img>
                 </div>
             </td>
-            <td style="display: block;">
+            <td>
                 <div id="optionList">
                     <button class="btn" id="makeNewDeckButton" onclick="makeDeck()">Create deck</button>
                     <div class="upload-btn-wrapper">
@@ -37,7 +37,6 @@
                         <button class="btn" for="filename" id="downloadDeck" onclick="downloadDeck()">Download deck</button><a id="download" download="" href=""></a>
                         <div class="shape"></div>
                     </div>
-                    
                     <div id="deckList"></div>
                 </div>
                 
@@ -52,10 +51,13 @@
     <menu id="cardMenu" class="cardMenu">
         <menu title="Add Card" onclick="addToDeck()"></menu>
     </menu>
+    <menu id="deckMenu" class="cardMenu">
+        <menu title="Remove Card" onclick="removeFromDeck()"></menu>
+    </menu>
 </body>
-<script type="text/javascript" src="globalVariable.js"></script>
-<script type="text/javascript" src="cardFetcher.js"></script>
-<script type="text/javascript" src="mainDisplayer.js"></script>
-<script type="text/javascript" src="userInterface.js"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='globalVariable.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='cardFetcher.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='mainDisplayer.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='userInterface.js') }}"></script>
 
 </html>

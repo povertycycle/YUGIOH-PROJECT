@@ -1,6 +1,5 @@
-function processCard(card)
-{
-    var cardData = 
+function processCard(card) {
+    var cardData =
     {
         "attr": card["attribute"],
         "level": card["level"],
@@ -18,13 +17,10 @@ function processCard(card)
 
 request.open('GET', 'https://db.ygoprodeck.com/api/v5/cardinfo.php', true);
 
-request.onload = function() 
-{
-    if (request.response) 
-    {
+request.onload = function () {
+    if (request.response) {
         var data = JSON.parse(this.response);
-        for(item of data)
-        {
+        for (item of data) {
             CARD_LIST[item.name] = processCard(item);
         }
         PROCESS_DONE = true;
@@ -32,3 +28,4 @@ request.onload = function()
 };
 
 request.send();
+

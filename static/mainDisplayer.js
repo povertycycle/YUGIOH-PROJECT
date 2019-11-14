@@ -8,8 +8,8 @@ SEARCHBAR.style.height = SEARCHBAR_HEIGHT + "px";
 BUTTON_SEARCHBAR.style.width = BUTTON_SEARCHBAR.style.height = BUTTON_HEIGHT + "px";
 BUTTON_SEARCHBAR.style.padding = "0px";
 
-CARD_IMAGE.style.width = CARD_DISPLAY_WIDTH + "px";
-CARD_IMAGE.style.height = CARD_DISPLAY_HEIGHT + "px";
+CARD_IMAGE.style.width = DECK_CARD_IMAGE.style.width = CARD_DISPLAY_WIDTH + "px";
+CARD_IMAGE.style.height = DECK_CARD_IMAGE.style.height = CARD_DISPLAY_HEIGHT + "px";
 
 DECK_LIST.style.overflow = "hidden scroll";
 DECK_LIST.style.width = DECK_LIST_WIDTH + "px";
