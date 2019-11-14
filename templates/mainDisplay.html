@@ -30,20 +30,24 @@
                     <button class="btn" id="makeNewDeckButton" onclick="makeDeck()">Create deck</button>
                     <div class="upload-btn-wrapper">
                         <button class="btn" id="uploadDeck">Upload a deck</button>
-                        <input type="file" name="myfile" onchange="handleFile(this.files)"/>
                     </div>
                     <button class="btn" id="saveDeck" onclick="saveDeck()">Save deck</button>
                     <div>
                         <button class="btn" for="filename" id="downloadDeck" onclick="downloadDeck()">Download deck</button><a id="download" download="" href=""></a>
                         <div class="shape"></div>
                     </div>
+                    <button class="btn" id="searchPlayer" onclick="searchPlayer()">Search Player</button>
                     <div id="deckList"></div>
                 </div>
-                
             </td>
             <td>
                 <div id="deckContentContainer">
                     <div id="deckContent"></div>
+                </div>
+            </td>
+            <td>
+                <div id="playerList">
+                    <button id="closeMenu" onclick="closePlayerSearch()"></button>
                 </div>
             </td>
         </tr>

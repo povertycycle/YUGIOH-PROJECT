@@ -24,5 +24,14 @@ DECK_CONTENT.style.backgroundColor = DEFAULT_BACKGROUND_COLOR;
 DECK_CONTENT_CONTAINER.style.height = window.innerHeight - GAP_WIDTH + "px";
 DECK_CONTENT_CONTAINER.style.overflow = "hidden scroll";
 
-OPTION_LIST.style.width = BUTTON_UPLOADDECK.style.width = BUTTON_MAKEDECK.style.width = BUTTON_SAVEDECK.style.width = BUTTON_DOWNLOADDECK.style.width = OPTION_LIST_WIDTH + "px";
+OPTION_LIST.style.width = BUTTON_UPLOADDECK.style.width = BUTTON_SEARCHPLAYER.style.width = BUTTON_MAKEDECK.style.width = BUTTON_SAVEDECK.style.width = BUTTON_DOWNLOADDECK.style.width = OPTION_LIST_WIDTH + "px";
 
+PLAYER_LIST.style.width = window.innerWidth + "px";
+PLAYER_LIST.style.height = window.innerHeight + "px";
+PLAYER_LIST.style.position = "absolute";
+PLAYER_LIST.style.display = "none";
+PLAYER_LIST.style.top = PLAYER_LIST.style.left = "0px";
+PLAYER_LIST.style.backgroundColor = DEFAULT_BACKGROUND_COLOR;
+PLAYER_LIST.style.zIndex = 5;
+
+BUTTON_CLOSEMENU.style.width = BUTTON_CLOSEMENU.style.height = BUTTON_HEIGHT + "px";

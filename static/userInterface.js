@@ -233,3 +233,13 @@ DECK_REQUEST.onload = async function()
         }
     }
 };
+
+function searchPlayer()
+{
+    PLAYER_LIST.style.display = "unset";
+}
+
+function closePlayerSearch()
+{
+    PLAYER_LIST.style.display = "none";
+}

@@ -5,6 +5,8 @@ var BUTTON_UPLOADDECK = document.getElementById("uploadDeck");
 var BUTTON_SAVEDECK = document.getElementById("saveDeck");
 var BUTTON_DOWNLOADDECK = document.getElementById("downloadDeck");
 var BUTTON_MAKEDECK = document.getElementById("makeNewDeckButton");
+var BUTTON_SEARCHPLAYER = document.getElementById("searchPlayer");
+var BUTTON_CLOSEMENU = document.getElementById("closeMenu");
 var CARD_IMAGE = document.getElementById("cardDisplayer");
 var SEARCHBAR = document.getElementById("searchBar");
 var DECK_LIST = document.getElementById("deckList");
@@ -14,6 +16,7 @@ var CARD_MENU = document.getElementById("cardMenu");
 var DECK_MENU = document.getElementById("deckMenu");
 var OPTION_LIST = document.getElementById("optionList");
 var DECK_CARD_IMAGE = document.getElementById("deckCardDisplayer");
+var PLAYER_LIST = document.getElementById("playerList");
 
 var SELECTED_DECK;
 var SELECTED_DECK_NAME;
