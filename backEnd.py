@@ -3,9 +3,12 @@ import io
 import json
 from flask import Flask, render_template
 from flask import jsonify
+from flask_socketio import SocketIO
 import webbrowser
-import socket    
+
 app = Flask(__name__)
+app.config['SECRET_KEY'] = 'vnkdjnfjknfl1232#'
+socketio = SocketIO(app)
 
 global FILENAME
 global REQUEST_CODES
@@ -59,7 +62,6 @@ def savePlayerName(player_name):
         return jsonify(code=REQUEST_CODES["REGISTER_PLAYER_FAIL"], files=None)
     else:   
         PLAYER_LIST[player_name] = {}
-        PLAYER_IP_LIST[player_name] = socket.gethostbyname(socket.gethostname())
         return jsonify(code=REQUEST_CODES["REGISTER_PLAYER_SUCESS"], files=None)   
 
 @app.route('/getListofPlayers')
@@ -81,7 +83,10 @@ def askPermissionForDuel(target_duelist):
     else:
         return jsonify(code=REQUEST_CODES["DUELIST_NOT_FOUND"], files=target_duelist) 
 
-
+@socketio.on('my event')
+def handle_my_custom_event(json, methods=['GET', 'POST']):
+    print('received my event: ' + str(json))
+    socketio.emit('my response', json)
 
 if __name__ == '__main__':
     global FILENAME
@@ -104,4 +109,4 @@ if __name__ == '__main__':
     print()
     # FILENAME = "http://localhost:5000/"
     # webbrowser.open_new_tab(FILENAME)
-    app.run(host='https://yugiohproject.hopto.org/')
+    socketio.run(app, debug=True)

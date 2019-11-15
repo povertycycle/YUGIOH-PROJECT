@@ -288,11 +288,7 @@ DUEL_REQUEST.onload = async function()
         }
         else if (json["code"]==ASK_DUEL_PERMISSION_REQUEST)
         {
-            console.log(json["files"]);
-            if (PLAYER_NAME===json["files"])
-            {
-                console.log("YES I AM");
-            }
+            
         }
         else if (json["code"]==DUELIST_NOT_FOUND)
         {
@@ -316,7 +312,12 @@ async function savePlayerName()
 {
     DUEL_REQUEST.open('GET', '/savePlayerName/'+PLAYER_NAME_INPUT_TEXT.value);
     DUEL_REQUEST.send();
-    alert("Registering player "+PLAYER_NAME_INPUT_TEXT.value+"...")
+    alert("Registering player "+PLAYER_NAME_INPUT_TEXT.value+"...");
+    SOCKET.emit('my event', 
+    {
+        user_name : PLAYER_NAME,
+        message : "New challenger approaches."
+    })
 }
 
 function refreshPlayerList()
@@ -336,10 +337,25 @@ function askDuelPermission()
 
 BUTTON_YES.onclick = async function()
 {
-    DUEL_REQUEST.open('GET', '/askPermissionForDuel/'+TARGET_DUELIST);
-    DUEL_REQUEST.send();
+    // DUEL_REQUEST.open('GET', '/askPermissionForDuel/'+TARGET_DUELIST);
+    // DUEL_REQUEST.send();
+    SOCKET.emit('my event', 
+    {
+        user_name : PLAYER_NAME,
+        message : TARGET_DUELIST
+    })
 }
 BUTTON_NO.onclick = function()
 {
     POPUP_PERMISSION.style.display = "none";
 }
+
+SOCKET.on('my response', function(msg) 
+{
+    console.log(msg)
+    if(typeof msg.user_name !== 'undefined' && typeof msg.message !== 'undefined') 
+    {
+        if (msg.user_name !== PLAYER_NAME)
+            alert(msg.user_name+" challenged "+msg.message + " to duel!");
+    }
+})

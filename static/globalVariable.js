@@ -89,6 +89,7 @@ var DEFAULT_BACKGROUND_COLOR = "#191919";
 var request = new XMLHttpRequest();
 var DECK_REQUEST = new XMLHttpRequest();
 var DUEL_REQUEST = new XMLHttpRequest();
+var SOCKET = io.connect('http://' + document.domain + ':' + location.port);
 
 var ALL_LOCAL_DECKS = 100;
 var LOCAL_DECK = 101;
