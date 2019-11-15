@@ -26,12 +26,24 @@ DECK_CONTENT_CONTAINER.style.overflow = "hidden scroll";
 
 OPTION_LIST.style.width = BUTTON_UPLOADDECK.style.width = BUTTON_SEARCHPLAYER.style.width = BUTTON_MAKEDECK.style.width = BUTTON_SAVEDECK.style.width = BUTTON_DOWNLOADDECK.style.width = OPTION_LIST_WIDTH + "px";
 
-PLAYER_LIST.style.width = window.innerWidth + "px";
-PLAYER_LIST.style.height = window.innerHeight + "px";
-PLAYER_LIST.style.position = "absolute";
-PLAYER_LIST.style.display = "none";
-PLAYER_LIST.style.top = PLAYER_LIST.style.left = "0px";
-PLAYER_LIST.style.backgroundColor = DEFAULT_BACKGROUND_COLOR;
-PLAYER_LIST.style.zIndex = 5;
+DUEL_MENU.style.width = window.innerWidth + "px";
+DUEL_MENU.style.height = window.innerHeight + "px";
+DUEL_MENU.style.position = "absolute";
+DUEL_MENU.style.display = "none";
+DUEL_MENU.style.top = DUEL_MENU.style.left = "0px";
+DUEL_MENU.style.backgroundColor = DEFAULT_BACKGROUND_COLOR;
+DUEL_MENU.style.zIndex = 5;
 
 BUTTON_CLOSEMENU.style.width = BUTTON_CLOSEMENU.style.height = BUTTON_HEIGHT + "px";
+BUTTON_CLOSEMENU.style.position = "absolute";
+BUTTON_CLOSEMENU.style.left = window.innerWidth - BUTTON_HEIGHT + "px";
+BUTTON_CLOSEMENU.style.top = 0 + "px";
+
+SAVE_PLAYER_MENU.style.top = BUTTON_HEIGHT + "px";
+
+POPUP_PERMISSION.style.display = "none";
+POPUP_PERMISSION.style.position = "absolute";
+POPUP_PERMISSION.style.zIndex = 100;
+POPUP_PERMISSION.style.width = POPUP_PERMISSION.style.height = POPUP_HEIGHT + "px";
+POPUP_PERMISSION.style.left = window.innerWidth/2 - POPUP_HEIGHT/2 + "px";
+POPUP_PERMISSION.style.top = window.innerHeight/2 - POPUP_HEIGHT/2 + "px";

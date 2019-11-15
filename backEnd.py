@@ -8,6 +8,7 @@ app = Flask(__name__)
 
 global FILENAME
 global REQUEST_CODES
+global PLAYER_LIST
 
 @app.route('/')
 def mainDisplay():
@@ -46,15 +47,41 @@ def downloadDeck(deck_name, deck_json):
     
     return jsonify(code=REQUEST_CODES["DOWNLOAD_DECK"], files=None)
 
+@app.route('/savePlayerName/<player_name>')
+def savePlayerName(player_name):
+    global REQUEST_CODES   
+    global PLAYER_LIST
+    
+    playerNames = PLAYER_LIST.keys()
+    if player_name in playerNames:
+        return jsonify(code=REQUEST_CODES["REGISTER_PLAYER_FAIL"], files=None)
+    else:   
+        PLAYER_LIST[player_name] = {}
+        return jsonify(code=REQUEST_CODES["REGISTER_PLAYER_SUCESS"], files=None)   
+
+@app.route('/getListofPlayers')
+def getListofPlayers():
+    global REQUEST_CODES   
+    global PLAYER_LIST
+
+    files = list(PLAYER_LIST.keys())
+    return jsonify(code=REQUEST_CODES["GET_PLAYER_LIST"], files=files)   
+        
 
 if __name__ == '__main__':
     global FILENAME
     global REQUEST_CODES
+    global PLAYER_LIST
+
+    PLAYER_LIST = {}
 
     REQUEST_CODES = {
         "ALL_LOCAL_DECKS" : 100,
         "LOCAL_DECK" : 101,
         "DOWNLOAD_DECK" : 200,
+        "REGISTER_PLAYER_SUCESS": 300,
+        "REGISTER_PLAYER_FAIL": 301,
+        "GET_PLAYER_LIST": 302,
     }
     print()
     # FILENAME = "http://localhost:5000/"

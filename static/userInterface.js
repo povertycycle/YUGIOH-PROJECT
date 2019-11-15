@@ -234,12 +234,100 @@ DECK_REQUEST.onload = async function()
     }
 };
 
+function initPlayerList(name)
+{
+    console.log(name);
+    var label = document.createElement("div");
+    label.innerText = name;
+    label.style.width = OPTION_LIST_WIDTH + "px";
+    label.style.borderRadius = BORDER_RADIUS + "px";
+    label.style.border = "white";
+    label.onmouseenter = function()
+    {
+        label.style.borderStyle = "solid";
+    }
+    label.onmouseout = function()
+    {
+        label.style.borderStyle = "";
+    }
+    label.onclick = function()
+    {
+        askDuelPermission();
+    }
+    return label;
+}
+
+DUEL_REQUEST.onload = async function() 
+{
+    if (DUEL_REQUEST.response)
+    {
+        var json = JSON.parse(DUEL_REQUEST.response);
+        if (json["code"]==REGISTER_PLAYER_SUCESS)
+        {
+            alert("Player registered successfully, Welcome "+PLAYER_NAME_INPUT_TEXT.value)
+            PLAYER_NAME = PLAYER_NAME_INPUT_TEXT.value;
+            SAVE_PLAYER_MENU.style.display = "none";
+            DUEL_REQUEST.open('GET', '/getListofPlayers');
+            DUEL_REQUEST.send();
+        }
+        else if (json["code"]==REGISTER_PLAYER_FAIL)
+        {
+            alert("Player did not successfully registered. Please try another name.")
+        }
+        else if (json["code"]==GET_PLAYER_LIST)
+        {
+            DUELISTS = json["files"];
+            for (i = 0; i < DUELISTS.length; i++)
+            {
+                if (PLAYER_NAME !== DUELISTS[i])
+                {
+                    var d = initPlayerList(DUELISTS[i]);
+                    console.log(d);
+                    PLAYER_LIST.appendChild(d);
+                }
+            }
+        }
+    }
+}
+
 function searchPlayer()
 {
-    PLAYER_LIST.style.display = "unset";
+    DUEL_MENU.style.display = "unset";
+    SAVE_PLAYER_MENU.style.display = "unset";
 }
 
 function closePlayerSearch()
 {
-    PLAYER_LIST.style.display = "none";
+    DUEL_MENU.style.display = "none";
+}
+
+function savePlayerName()
+{
+    DUEL_REQUEST.open('GET', '/savePlayerName/'+PLAYER_NAME_INPUT_TEXT.value);
+    DUEL_REQUEST.send();
+    alert("Registering player "+PLAYER_NAME_INPUT_TEXT.value+"...")
+}
+
+function refreshPlayerList()
+{
+    while(PLAYER_LIST.firstChild)
+    {
+        PLAYER_LIST.removeChild(PLAYER_LIST.firstChild);
+    }
+    DUEL_REQUEST.open('GET', '/getListofPlayers');
+    DUEL_REQUEST.send();
+}
+
+function askDuelPermission()
+{
+    var div = document.createElement("div");
+    div.innerText = "Ask for Duel?";
+    var div2 = document.createElement("div");
+    div2.innerText = "Yes?";
+    var div3 = document.createElement("div");
+    div3.innerText = "No?";
+    POPUP_PERMISSION.appendChild(div);
+    POPUP_PERMISSION.appendChild(div2);
+    POPUP_PERMISSION.appendChild(div3);
+    POPUP_PERMISSION.style.display = "unset";
 }

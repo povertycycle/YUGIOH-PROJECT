@@ -7,6 +7,7 @@ var BUTTON_DOWNLOADDECK = document.getElementById("downloadDeck");
 var BUTTON_MAKEDECK = document.getElementById("makeNewDeckButton");
 var BUTTON_SEARCHPLAYER = document.getElementById("searchPlayer");
 var BUTTON_CLOSEMENU = document.getElementById("closeMenu");
+var BUTTON_REFRESH_LIST = document.getElementById("refreshPlayerList");
 var CARD_IMAGE = document.getElementById("cardDisplayer");
 var SEARCHBAR = document.getElementById("searchBar");
 var DECK_LIST = document.getElementById("deckList");
@@ -16,13 +17,19 @@ var CARD_MENU = document.getElementById("cardMenu");
 var DECK_MENU = document.getElementById("deckMenu");
 var OPTION_LIST = document.getElementById("optionList");
 var DECK_CARD_IMAGE = document.getElementById("deckCardDisplayer");
+var DUEL_MENU = document.getElementById("duelMenu");
 var PLAYER_LIST = document.getElementById("playerList");
+var PLAYER_NAME_INPUT_TEXT = document.getElementById("inputPlayerName");
+var SAVE_PLAYER_MENU = document.getElementById("savePlayerMenu");
+var POPUP_PERMISSION = document.getElementById("popupPermission");
 
+var PLAYER_NAME;
 var SELECTED_DECK;
 var SELECTED_DECK_NAME;
 var SELECTED_CARD;
 var CARD_LIST = {};
 var LOCAL_DECKS = {};
+var DUELISTS = [];
 
 var TYPES = 
 {
@@ -72,13 +79,19 @@ var CARD_LIST_DISPLAYER_HEIGHT = window.innerHeight - 30;
 var DECK_CONTENT_WIDTH = 600;
 var DECK_CONTENT_HEIGHT = 2000;
 var BORDER_RADIUS = 1;
+var POPUP_HEIGHT = 100;
 
 var DEFAULT_BACKGROUND_COLOR = "#191919";
 
 var request = new XMLHttpRequest();
 var DECK_REQUEST = new XMLHttpRequest();
+var DUEL_REQUEST = new XMLHttpRequest();
+
 var ALL_LOCAL_DECKS = 100;
 var LOCAL_DECK = 101;
 var DOWNLOAD_DECK = 200;
+var REGISTER_PLAYER_SUCESS = 300;
+var REGISTER_PLAYER_FAIL = 301;
+var GET_PLAYER_LIST = 302;
 
 var PROCESS_DONE = false;

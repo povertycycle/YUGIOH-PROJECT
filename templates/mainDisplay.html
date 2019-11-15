@@ -45,9 +45,16 @@
                     <div id="deckContent"></div>
                 </div>
             </td>
-            <td>
-                <div id="playerList">
+            <td> 
+                <div style="position: absolute; left: 0px; top: 0px; z-index: 6; display: none" id="savePlayerMenu">
                     <button id="closeMenu" onclick="closePlayerSearch()"></button>
+                    Player name: <input type="text" id="inputPlayerName"><br>
+                    <input type="submit" value="Submit" onclick="savePlayerName()">
+                </div>
+                <div id="popupPermission"></div>
+                <div id="duelMenu">
+                    <button id="refreshPlayerList" onclick="refreshPlayerList()">Refresh Player List</button>
+                    <div id="playerList"></div>
                 </div>
             </td>
         </tr>
