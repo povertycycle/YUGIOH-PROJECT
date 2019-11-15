@@ -48,3 +48,5 @@ POPUP_PERMISSION.style.width = POPUP_PERMISSION.style.height = POPUP_HEIGHT + "p
 POPUP_PERMISSION.style.left = window.innerWidth/2 - POPUP_HEIGHT/2 + "px";
 POPUP_PERMISSION.style.top = window.innerHeight/2 - POPUP_HEIGHT/2 + "px";
 
+DUEL_FIELD.style.width = window.innerWidth + "px";
+DUEL_FIELD.style.height = window.innerHeight + "px";

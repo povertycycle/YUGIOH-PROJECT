@@ -53,14 +53,18 @@
                     <input type="submit" value="Submit" onclick="savePlayerName()">
                 </div>
                 <div id="popupPermission">
-                    <div>Ask for Duel?</div>
+                    <div id="questionText"></div>
                     <div id="yesButton">Yes</div>
                     <div id="noButton">No</div>
                 </div>
                 <div id="duelMenu">
                     <button id="refreshPlayerList" onclick="refreshPlayerList()">Refresh Player List</button>
                     <div id="playerList"></div>
+                    <div id="deckForDuel"></div>
                 </div>
+            </td>
+            <td>
+                <div id="duelField" style="display: none; position: absolute; top:0px; left:0px; background-color: white; z-index: 50;"></div>
             </td>
         </tr>
     </table>

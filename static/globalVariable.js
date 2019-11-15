@@ -24,6 +24,9 @@ var PLAYER_LIST = document.getElementById("playerList");
 var PLAYER_NAME_INPUT_TEXT = document.getElementById("inputPlayerName");
 var SAVE_PLAYER_MENU = document.getElementById("savePlayerMenu");
 var POPUP_PERMISSION = document.getElementById("popupPermission");
+var QUESTION_TEXT = document.getElementById("questionText");
+var DECK_LIST_FOR_DUEL = document.getElementById('deckForDuel');
+var DUEL_FIELD = document.getElementById("duelField");
 
 var PLAYER_NAME;
 var TARGET_DUELIST;
@@ -33,6 +36,7 @@ var SELECTED_CARD;
 var CARD_LIST = {};
 var LOCAL_DECKS = {};
 var DUELISTS = [];
+var DUELING_DECK;
 
 var TYPES = 
 {
@@ -97,7 +101,5 @@ var DOWNLOAD_DECK = 200;
 var REGISTER_PLAYER_SUCESS = 300;
 var REGISTER_PLAYER_FAIL = 301;
 var GET_PLAYER_LIST = 302;
-var ASK_DUEL_PERMISSION_REQUEST = 303;
-var DUELIST_NOT_FOUND = 400;
 
 var PROCESS_DONE = false;

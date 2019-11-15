@@ -301,6 +301,7 @@ function searchPlayer()
 {
     DUEL_MENU.style.display = "unset";
     SAVE_PLAYER_MENU.style.display = "unset";
+    goToDuelInterface();
 }
 
 function closePlayerSearch()
@@ -313,10 +314,10 @@ async function savePlayerName()
     DUEL_REQUEST.open('GET', '/savePlayerName/'+PLAYER_NAME_INPUT_TEXT.value);
     DUEL_REQUEST.send();
     alert("Registering player "+PLAYER_NAME_INPUT_TEXT.value+"...");
-    SOCKET.emit('my event', 
+    SOCKET.emit('broadcastPlayer', 
     {
         user_name : PLAYER_NAME,
-        message : "New challenger approaches."
+        message : "New challenger approaches. "
     })
 }
 
@@ -332,30 +333,107 @@ function refreshPlayerList()
 
 function askDuelPermission()
 {
+    QUESTION_TEXT.innerText = "Ask for duel?"
     POPUP_PERMISSION.style.display = "unset";
+    BUTTON_YES.onclick = async function()
+    {
+        SOCKET.emit('askPermissionForDuel', 
+        {
+            challenger : PLAYER_NAME,
+            target_duelist: TARGET_DUELIST
+        })
+        POPUP_PERMISSION.style.display = "none";
+    }
+    BUTTON_NO.onclick = function()
+    {
+        POPUP_PERMISSION.style.display = "none";
+    }
 }
 
-BUTTON_YES.onclick = async function()
+function goToDuelInterface()
 {
-    // DUEL_REQUEST.open('GET', '/askPermissionForDuel/'+TARGET_DUELIST);
-    // DUEL_REQUEST.send();
-    SOCKET.emit('my event', 
+    SOCKET.on('askPermissionForDuel', function(msg) 
     {
-        user_name : PLAYER_NAME,
-        message : TARGET_DUELIST
+        if(typeof msg.challenger !== 'undefined' && typeof msg.target_duelist !== 'undefined') 
+        {
+            if (msg.challenger !== PLAYER_NAME && PLAYER_NAME === msg.target_duelist) {
+                alert(msg.challenger+" challenged "+msg.target_duelist + " to duel!");
+                QUESTION_TEXT.innerText = msg.challenger + " challenged you to duel!. Accept?"
+                POPUP_PERMISSION.style.display = "unset";
+                BUTTON_YES.onclick = async function()
+                {
+                    SOCKET.emit('challengeResponse', 
+                    {
+                        target_duelist : PLAYER_NAME,
+                        challenger : msg.challenger,
+                        action: 1,
+                    })
+                    POPUP_PERMISSION.style.display = "none";
+                }
+                BUTTON_NO.onclick = async function()
+                {
+                    SOCKET.emit('challengeResponse', 
+                    {
+                        target_duelist : PLAYER_NAME,
+                        challenger : msg.challenger,
+                        action: 0,
+                    })
+                    POPUP_PERMISSION.style.display = "none";
+                }
+            }
+        }
+    })
+    
+   
+    
+    SOCKET.on('challengeResponse', function(msg) 
+    {
+        if(typeof msg.target_duelist !== 'undefined' && typeof msg.challenger !== 'undefined' && typeof msg.action !== 'undefined') 
+        {
+            if (msg.challenger === PLAYER_NAME && msg.action === 1)
+            {
+                SOCKET.emit('prepareDuel',
+                {
+                    duelist_A: msg.challenger,
+                    duelist_B: msg.target_duelist
+                })               
+            }
+            else if (msg.challenger === PLAYER_NAME && action === 0)
+                alert(msg.target_duelist + " declined.")
+        }
     })
 }
-BUTTON_NO.onclick = function()
-{
-    POPUP_PERMISSION.style.display = "none";
-}
 
-SOCKET.on('my response', function(msg) 
+SOCKET.on('broadcastPlayer', function(msg) 
 {
-    console.log(msg)
     if(typeof msg.user_name !== 'undefined' && typeof msg.message !== 'undefined') 
     {
         if (msg.user_name !== PLAYER_NAME)
-            alert(msg.user_name+" challenged "+msg.message + " to duel!");
+            alert(msg.message+msg.user_name+" is now connected! Be wary!");
     }
 })
+
+SOCKET.on('duelInterfaceResponse', function(msg)
+{
+    if(typeof msg.duelist_A !== 'undefined' && typeof msg.duelist_A !== 'undefined') 
+    {
+        if (msg.duelist_A === PLAYER_NAME || msg.duelist_B === PLAYER_NAME)
+        { 
+            alert("Select a deck");
+            var decks = DECK_LIST.children;
+            for (var i = 0; i < decks.length; i++)
+            {
+                var deckname = decks[i].innerText;
+                var d = document.createElement('div');
+                d.innerText = deckname;
+                d.onclick = function() { goToDuelField(); };
+                DECK_LIST_FOR_DUEL.appendChild(d);
+            }
+        }
+    }
+})
+
+function goToDuelField()
+{
+    DUEL_FIELD.style.display = "unset";
+}

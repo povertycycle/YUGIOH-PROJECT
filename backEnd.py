@@ -72,21 +72,21 @@ def getListofPlayers():
     files = list(PLAYER_LIST.keys())
     return jsonify(code=REQUEST_CODES["GET_PLAYER_LIST"], files=files)   
         
-@app.route('/askPermissionForDuel/<target_duelist>')
-def askPermissionForDuel(target_duelist):
-    global REQUEST_CODES   
-    global PLAYER_LIST
+@socketio.on('askPermissionForDuel')
+def askPermissionForDuel(json, methods=['GET', 'POST']):
+    socketio.emit('askPermissionForDuel', json)
 
-    playerNames = PLAYER_LIST.keys()
-    if target_duelist in playerNames:
-        return jsonify(code=REQUEST_CODES["ASK_DUEL_PERMISSION_REQUEST"], files=target_duelist) 
-    else:
-        return jsonify(code=REQUEST_CODES["DUELIST_NOT_FOUND"], files=target_duelist) 
+@socketio.on('broadcastPlayer')
+def broadcastPlayer(json, methods=['GET', 'POST']):
+    socketio.emit('broadcastPlayer', json)
 
-@socketio.on('my event')
-def handle_my_custom_event(json, methods=['GET', 'POST']):
-    print('received my event: ' + str(json))
-    socketio.emit('my response', json)
+@socketio.on('challengeResponse')
+def challengeResponse(json, methods=['GET', 'POST']):
+    socketio.emit('challengeResponse', json)
+
+@socketio.on('prepareDuel')
+def prepareDuel(json, methods=['GET', 'POST']):
+    socketio.emit('duelInterfaceResponse', json)
 
 if __name__ == '__main__':
     global FILENAME
@@ -103,8 +103,6 @@ if __name__ == '__main__':
         "REGISTER_PLAYER_SUCESS": 300,
         "REGISTER_PLAYER_FAIL": 301,
         "GET_PLAYER_LIST": 302,
-        "ASK_DUEL_PERMISSION_REQUEST": 303,
-        "DUELIST_NOT_FOUND": 400,
     }
     print()
     # FILENAME = "http://localhost:5000/"
