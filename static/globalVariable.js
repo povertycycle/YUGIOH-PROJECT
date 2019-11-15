@@ -8,6 +8,8 @@ var BUTTON_MAKEDECK = document.getElementById("makeNewDeckButton");
 var BUTTON_SEARCHPLAYER = document.getElementById("searchPlayer");
 var BUTTON_CLOSEMENU = document.getElementById("closeMenu");
 var BUTTON_REFRESH_LIST = document.getElementById("refreshPlayerList");
+var BUTTON_YES = document.getElementById("yesButton");
+var BUTTON_NO = document.getElementById("noButton");
 var CARD_IMAGE = document.getElementById("cardDisplayer");
 var SEARCHBAR = document.getElementById("searchBar");
 var DECK_LIST = document.getElementById("deckList");
@@ -24,6 +26,7 @@ var SAVE_PLAYER_MENU = document.getElementById("savePlayerMenu");
 var POPUP_PERMISSION = document.getElementById("popupPermission");
 
 var PLAYER_NAME;
+var TARGET_DUELIST;
 var SELECTED_DECK;
 var SELECTED_DECK_NAME;
 var SELECTED_CARD;
@@ -93,5 +96,7 @@ var DOWNLOAD_DECK = 200;
 var REGISTER_PLAYER_SUCESS = 300;
 var REGISTER_PLAYER_FAIL = 301;
 var GET_PLAYER_LIST = 302;
+var ASK_DUEL_PERMISSION_REQUEST = 303;
+var DUELIST_NOT_FOUND = 400;
 
 var PROCESS_DONE = false;

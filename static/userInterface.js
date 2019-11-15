@@ -236,7 +236,6 @@ DECK_REQUEST.onload = async function()
 
 function initPlayerList(name)
 {
-    console.log(name);
     var label = document.createElement("div");
     label.innerText = name;
     label.style.width = OPTION_LIST_WIDTH + "px";
@@ -252,6 +251,7 @@ function initPlayerList(name)
     }
     label.onclick = function()
     {
+        TARGET_DUELIST = name;
         askDuelPermission();
     }
     return label;
@@ -282,10 +282,21 @@ DUEL_REQUEST.onload = async function()
                 if (PLAYER_NAME !== DUELISTS[i])
                 {
                     var d = initPlayerList(DUELISTS[i]);
-                    console.log(d);
                     PLAYER_LIST.appendChild(d);
                 }
             }
+        }
+        else if (json["code"]==ASK_DUEL_PERMISSION_REQUEST)
+        {
+            console.log(json["files"]);
+            if (PLAYER_NAME===json["files"])
+            {
+                console.log("YES I AM");
+            }
+        }
+        else if (json["code"]==DUELIST_NOT_FOUND)
+        {
+            alert("Duelist may have logged off");
         }
     }
 }
@@ -301,7 +312,7 @@ function closePlayerSearch()
     DUEL_MENU.style.display = "none";
 }
 
-function savePlayerName()
+async function savePlayerName()
 {
     DUEL_REQUEST.open('GET', '/savePlayerName/'+PLAYER_NAME_INPUT_TEXT.value);
     DUEL_REQUEST.send();
@@ -320,14 +331,15 @@ function refreshPlayerList()
 
 function askDuelPermission()
 {
-    var div = document.createElement("div");
-    div.innerText = "Ask for Duel?";
-    var div2 = document.createElement("div");
-    div2.innerText = "Yes?";
-    var div3 = document.createElement("div");
-    div3.innerText = "No?";
-    POPUP_PERMISSION.appendChild(div);
-    POPUP_PERMISSION.appendChild(div2);
-    POPUP_PERMISSION.appendChild(div3);
     POPUP_PERMISSION.style.display = "unset";
+}
+
+BUTTON_YES.onclick = async function()
+{
+    DUEL_REQUEST.open('GET', '/askPermissionForDuel/'+TARGET_DUELIST);
+    DUEL_REQUEST.send();
+}
+BUTTON_NO.onclick = function()
+{
+    POPUP_PERMISSION.style.display = "none";
 }

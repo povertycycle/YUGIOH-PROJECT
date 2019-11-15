@@ -4,11 +4,13 @@ import json
 from flask import Flask, render_template
 from flask import jsonify
 import webbrowser
+import socket    
 app = Flask(__name__)
 
 global FILENAME
 global REQUEST_CODES
 global PLAYER_LIST
+global PLAYER_IP_LIST
 
 @app.route('/')
 def mainDisplay():
@@ -57,6 +59,7 @@ def savePlayerName(player_name):
         return jsonify(code=REQUEST_CODES["REGISTER_PLAYER_FAIL"], files=None)
     else:   
         PLAYER_LIST[player_name] = {}
+        PLAYER_IP_LIST[player_name] = socket.gethostbyname(socket.gethostname())
         return jsonify(code=REQUEST_CODES["REGISTER_PLAYER_SUCESS"], files=None)   
 
 @app.route('/getListofPlayers')
@@ -67,6 +70,18 @@ def getListofPlayers():
     files = list(PLAYER_LIST.keys())
     return jsonify(code=REQUEST_CODES["GET_PLAYER_LIST"], files=files)   
         
+@app.route('/askPermissionForDuel/<target_duelist>')
+def askPermissionForDuel(target_duelist):
+    global REQUEST_CODES   
+    global PLAYER_LIST
+
+    playerNames = PLAYER_LIST.keys()
+    if target_duelist in playerNames:
+        return jsonify(code=REQUEST_CODES["ASK_DUEL_PERMISSION_REQUEST"], files=target_duelist) 
+    else:
+        return jsonify(code=REQUEST_CODES["DUELIST_NOT_FOUND"], files=target_duelist) 
+
+
 
 if __name__ == '__main__':
     global FILENAME
@@ -74,6 +89,7 @@ if __name__ == '__main__':
     global PLAYER_LIST
 
     PLAYER_LIST = {}
+    PLAYER_IP_LIST = {}
 
     REQUEST_CODES = {
         "ALL_LOCAL_DECKS" : 100,
@@ -82,8 +98,10 @@ if __name__ == '__main__':
         "REGISTER_PLAYER_SUCESS": 300,
         "REGISTER_PLAYER_FAIL": 301,
         "GET_PLAYER_LIST": 302,
+        "ASK_DUEL_PERMISSION_REQUEST": 303,
+        "DUELIST_NOT_FOUND": 400,
     }
     print()
     # FILENAME = "http://localhost:5000/"
     # webbrowser.open_new_tab(FILENAME)
-    app.run()
+    app.run(host='https://yugiohproject.hopto.org/')
