@@ -1,24 +1,68 @@
-var BODY = document.getElementsByTagName("body");
-var CARD_LIST_DISPLAYER = document.getElementById("cardListDisplayer");
-var BUTTON_SEARCHBAR = document.getElementById("searchBarButton");
+var BODY = document.getElementsByTagName("body")[0];
+var DIV_MAIN_TITLE = document.getElementById("mainTitle");
+var DIV_MAIN_MENU = document.getElementById("mainMenu");
+var DIV_BUILD_DECK_MENU = document.getElementById("buildDeckMenu");
+var DIV_CARD_LIST_DISPLAY;
+var BUTTON_STORY_MODE;
+var BUTTON_FREE_DUEL;
+var BUTTON_BUILD_DECK;
+var BUTTON_OPTION;
+var BUTTON_GALLERY;
+var BUTTON_SEARCH_BAR;
+var BUTTON_NEW_DECK;
+var BUTTON_GET_LOCAL_DECKS;
+var BUTTON_SAVE_DECK;
+var INPUT_SEARCH_BAR;
+var IMAGE_CARD_DATABASE_DISPLAY;
+var IMAGE_CARD_DECK_DISPLAY;
+var DIV_BUILD_DECK_OPTIONS;
+
+var DEFAULT_BACKGROUND_COLOR = "#191919";
+
+var GAP_WIDTH = 5;
+var BORDER_RADIUS = 1;
+var MAIN_TITLE_FONT_SIZE = 40;
+var MAIN_TITLE_FADE_TIME = 5;
+var MAIN_MENU_FONT_SIZE = 20;
+var BUTTON_FADE_TIME = 0.25;
+var BUTTON_SEARCH_DIMENSION = 25;
+var BUTTON_BUILD_MENU_WIDTH = 100;
+var DIV_CARD_LIST_WIDTH = 300;
+var DIV_CARD_LIST_HEIGHT = window.innerHeight - BUTTON_SEARCH_DIMENSION - GAP_WIDTH;
+var CARD_RATIO = 421/614;
+var CARD_DISPLAY_HEIGHT = window.innerHeight/2 - 2*BORDER_RADIUS;
+var CARD_DISPLAY_WIDTH = CARD_RATIO*CARD_DISPLAY_HEIGHT;
+
+var API_REQUEST = new XMLHttpRequest();
+
+var MAIN_MENU_BUTTONS = 
+[
+    "Story Mode",
+    "Free Duel",
+    "Build Deck",
+    "Option",
+    "Galery"
+];
+
+
+
+
+
+
+
+
 var BUTTON_UPLOADDECK = document.getElementById("uploadDeck");
-var BUTTON_SAVEDECK = document.getElementById("saveDeck");
 var BUTTON_DOWNLOADDECK = document.getElementById("downloadDeck");
-var BUTTON_MAKEDECK = document.getElementById("makeNewDeckButton");
 var BUTTON_SEARCHPLAYER = document.getElementById("searchPlayer");
 var BUTTON_CLOSEMENU = document.getElementById("closeMenu");
 var BUTTON_REFRESH_LIST = document.getElementById("refreshPlayerList");
 var BUTTON_YES = document.getElementById("yesButton");
 var BUTTON_NO = document.getElementById("noButton");
-var CARD_IMAGE = document.getElementById("cardDisplayer");
-var SEARCHBAR = document.getElementById("searchBar");
 var DECK_LIST = document.getElementById("deckList");
 var DECK_CONTENT = document.getElementById("deckContent");
 var DECK_CONTENT_CONTAINER = document.getElementById("deckContentContainer");
 var CARD_MENU = document.getElementById("cardMenu");
 var DECK_MENU = document.getElementById("deckMenu");
-var OPTION_LIST = document.getElementById("optionList");
-var DECK_CARD_IMAGE = document.getElementById("deckCardDisplayer");
 var DUEL_MENU = document.getElementById("duelMenu");
 var PLAYER_LIST = document.getElementById("playerList");
 var PLAYER_NAME_INPUT_TEXT = document.getElementById("inputPlayerName");
@@ -69,28 +113,16 @@ var TYPES =
     "Pendulum Flip Effect Monster" : "72624F",
 };
 
-var BUTTON_HEIGHT = 25;
-var SEARCHBAR_HEIGHT = 25;
-var GAP_WIDTH = 5;
-var CARD_LIST_DISPLAYER_WIDTH = 300;
-var CARD_RATIO = 614/421;
-var CARD_DISPLAY_WIDTH = 200;
-var CARD_DISPLAY_HEIGHT = CARD_DISPLAY_WIDTH * CARD_RATIO;
 var LABEL_HEIGHT = 20;
 var DECK_LIST_WIDTH = 150;
 var DECK_CARD_LIST_HEIGHT = 25;
 var NEW_DECK_HEIGHT = 25;
 var DECK_LIST_HEIGHT = 1000;
-var OPTION_LIST_WIDTH = 100;
-var CARD_LIST_DISPLAYER_HEIGHT = window.innerHeight - 30;
 var DECK_CONTENT_WIDTH = 600;
 var DECK_CONTENT_HEIGHT = 2000;
-var BORDER_RADIUS = 1;
 var POPUP_HEIGHT = 100;
 
-var DEFAULT_BACKGROUND_COLOR = "#191919";
 
-var request = new XMLHttpRequest();
 var DECK_REQUEST = new XMLHttpRequest();
 var DUEL_REQUEST = new XMLHttpRequest();
 var SOCKET = io.connect('http://' + document.domain + ':' + location.port);

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" href="static/style.css">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.3/socket.io.min.js"></script>
+</head>
+<body style="background: #353535; font-size: 10px; font-family: 'Cambria';" text='white'>
+    <div id="mainTitle"></div>
+    <div id="mainMenu"></div>
+    <div id="buildDeckMenu" style="display: none;"></div>
+
+
+    
+   <menu id="cardMenu" class="cardMenu">
+    <menu title="Add Card" onclick="addToDeck()"></menu>
+</menu>
+<menu id="deckMenu" class="cardMenu">
+    <menu title="Remove Card" onclick="removeFromDeck()"></menu>
+</menu>
+</body>
+<script type="text/javascript" src="{{ url_for('static', filename='globalVariables.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='buildDeckDisplay.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='mainFunctions.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='mainTitle.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='userInterface.js') }}"></script>
+
+</html>

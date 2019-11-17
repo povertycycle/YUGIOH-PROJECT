@@ -17,7 +17,7 @@ global PLAYER_IP_LIST
 
 @app.route('/')
 def mainDisplay():
-    return render_template('mainDisplay.html', initial = None)
+    return render_template('frontEnd.html', initial = None)
 
 @app.route('/requestResponse/<response_code>;<deck_name>')
 def requestResponse(response_code, deck_name):
