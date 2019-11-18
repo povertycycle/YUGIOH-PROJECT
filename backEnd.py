@@ -7,7 +7,7 @@ from flask_socketio import SocketIO
 import webbrowser
 
 app = Flask(__name__)
-app.config['SECRET_KEY'] = 'vnkdjnfjknfl1232#'
+app.config['SECRET_KEY'] = 'vnkbjafhknrl1532#'
 socketio = SocketIO(app)
 
 global FILENAME
@@ -19,25 +19,19 @@ global PLAYER_IP_LIST
 def mainDisplay():
     return render_template('frontEnd.html', initial = None)
 
-@app.route('/requestResponse/<response_code>;<deck_name>')
-def requestResponse(response_code, deck_name):
+@app.route('/getAllLocalDecks')
+def getAllLocalDecks():
     global REQUEST_CODES
 
-    if (int(response_code)==REQUEST_CODES["ALL_LOCAL_DECKS"]):
-        mypath = os.listdir('decks/')
-        i = 0
-        files = {}
-        for item in mypath:
-            files[str(i)] = item
-            i += 1
-        return jsonify(code=REQUEST_CODES["ALL_LOCAL_DECKS"], files=files)
-    elif (int(response_code)==REQUEST_CODES["LOCAL_DECK"]):
-        with open('decks/'+deck_name) as json_file:
-            data = json.load(json_file)
-            deck = [deck_name, data]
-        return jsonify(code=REQUEST_CODES["LOCAL_DECK"], files=deck)
-    else:
-        return "ERROR_REQUEST_CODE_NOT_FOUND"
+    mypath = os.listdir('decks/')
+    files = {}
+    for item in mypath:
+        if (item.split('.')[1] == "json"):
+            with open('decks/'+item) as json_file:
+                data = json.load(json_file)
+                files[item.split('.')[0]] = data
+    return jsonify(code=REQUEST_CODES["ALL_LOCAL_DECKS"], files=files)
+
 
 @app.route('/downloadDeck/<deck_name>;<deck_json>')
 def downloadDeck(deck_name, deck_json):

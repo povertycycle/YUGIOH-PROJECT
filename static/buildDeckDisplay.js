@@ -122,7 +122,6 @@ function buildDeckDisplay() {
 
 
 // ONCLICK:
-// GetLocalDecks
 // Save Deck
 
 
@@ -134,11 +133,7 @@ function buildDeckDisplay() {
 //         Player name: <input type="text" id="inputPlayerName"><br>
 //         <input type="submit" value="Submit" onclick="savePlayerName()">
 //     </div>
-//     <div id="popupPermission">
-//         <div id="questionText"></div>
-//         <div id="yesButton">Yes</div>
-//         <div id="noButton">No</div>
-//     </div>
+//     
 //     <div id="duelMenu">
 //         <button id="refreshPlayerList" onclick="refreshPlayerList()">Refresh Player List</button>
 //         <div id="playerList"></div>
@@ -176,12 +171,7 @@ BUTTON_CLOSEMENU.style.top = 0 + "px";
 
 SAVE_PLAYER_MENU.style.top = BUTTON_HEIGHT + "px";
 
-POPUP_PERMISSION.style.display = "none";
-POPUP_PERMISSION.style.position = "absolute";
-POPUP_PERMISSION.style.zIndex = 100;
-POPUP_PERMISSION.style.width = POPUP_PERMISSION.style.height = POPUP_HEIGHT + "px";
-POPUP_PERMISSION.style.left = window.innerWidth / 2 - POPUP_HEIGHT / 2 + "px";
-POPUP_PERMISSION.style.top = window.innerHeight / 2 - POPUP_HEIGHT / 2 + "px";
+
 
 DUEL_FIELD.style.width = window.innerWidth + "px";
 DUEL_FIELD.style.height = window.innerHeight + "px";

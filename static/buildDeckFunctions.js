@@ -143,5 +143,43 @@ function makeDeck() {
 }
 
 function getLocalDecks() {
+    DECK_REQUEST.open('GET', '/getAllLocalDecks');
+    DECK_REQUEST.send();
+}
+
+async function getAllLocalDecks(name, deck) {
+    return new Promise(resolve => {
+        if (LOCAL_DECKS[name]) {
+            DIV_TEXT_QUESTION.innerText = "Do you want to replace Deck: " + name + " with a local deck with the same name?";
+            DIV_POPUP_PERMISSION.style.display = "unset";
+            BUTTON_YES.onclick = function () {
+                LOCAL_DECKS[name] = deck;
+                DIV_POPUP_PERMISSION.style.display = "none";
+                resolve('y');
+            };
+            BUTTON_NO.onclick = function () {
+                DIV_POPUP_PERMISSION.style.display = "none";
+                resolve('n');
+            };
+        }
+        else
+        {
+            LOCAL_DECKS[name] = deck;
+            resolve('n.a.');
+        }
+    });
 
 }
+
+DECK_REQUEST.onload = async function () {
+    if (DECK_REQUEST.response) {
+        var json = JSON.parse(DECK_REQUEST.response)
+        if (json["code"] == REQUEST_ALL_LOCAL_DECKS) {
+            var decks = json["files"];
+            var deckNames = Object.keys(decks);
+            for (item of deckNames) {
+                var res = await getAllLocalDecks(item, decks[item]);
+            }
+        }
+    }
+};

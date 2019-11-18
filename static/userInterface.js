@@ -21,25 +21,6 @@ function openCardMenu(e)
 
 
 
-var interval = window.setInterval(function()
-{    
-    if (CARD_LIST)
-    {
-        var cardNames = Object.keys(CARD_LIST);
-        for (i = 0; i < cardNames.length; i++)
-        {
-            var name = cardNames[i];
-            var cardLabel = makeLabel(name, CARD_LIST[name]["image"], CARD_LIST[name]["type"]);
-            CARD_LIST_DISPLAYER.appendChild(cardLabel);
-        }
-    }
-    if (PROCESS_DONE) window.clearInterval(interval);
-}, 1000);
-
-
-
-
-
 
 function openDeck(name)
 {
@@ -119,39 +100,9 @@ function downloadDeck()
     DECK_REQUEST.send();
 }
 
-DECK_REQUEST.open('GET', '/requestResponse/'+ALL_LOCAL_DECKS+";NONE");
-DECK_REQUEST.send();
 
-DECK_REQUEST.onload = async function() 
-{
-    if (DECK_REQUEST.response) 
-    {
-        var json = JSON.parse(DECK_REQUEST.response)
-        if (json["code"]==ALL_LOCAL_DECKS)
-        {
-            var JSON_DECKS = json["files"];
-            for (item of Object.keys(JSON_DECKS))
-            {
-                var deckName =  JSON_DECKS[item];
-                LOCAL_DECKS[deckName] = {};                
-                DECK_REQUEST.open('GET', '/requestResponse/'+LOCAL_DECK+';'+deckName);
-                DECK_REQUEST.send();         
-            }
-        }
-        else if (json["code"]==LOCAL_DECK)
-        {
-            var deckName = json["files"][0].split('.')[0];
-            LOCAL_DECKS[deckName] = json["files"][1];
-            var newDeck = document.createElement("div");
-            initDeck(newDeck, deckName);
-            DECK_LIST.appendChild(newDeck);
-        }
-        else if (json["code"]==DOWNLOAD_DECK)
-        {
-            alert("Deck has been saved...")
-        }
-    }
-};
+
+
 
 function initPlayerList(name)
 {
