@@ -4,7 +4,7 @@ function goToBuildDeck() {
     BUTTON_BUILD_DECK = document.getElementById("buildDeck");
     BUTTON_OPTION = document.getElementById("option");
     BUTTON_GALLERY = document.getElementById("gallery");
-    BUTTON_BUILD_DECK.style.animation = "buttonBlinking 1s";
+    BUTTON_BUILD_DECK.style.animation = "buttonBlinking 0.5s";
     BUTTON_BUILD_DECK.style.animationPlayState = "running";
     DIV_BUILD_DECK_MENU.style.width = window.innerWidth + "px";
     DIV_BUILD_DECK_MENU.style.height = window.innerHeight + "px";
@@ -24,7 +24,7 @@ function setFirstColumn(row, i) {
     var cardDatabase = row.insertCell(i);
     var form = document.createElement("form");
     form.className = "example";
-    form.onsubmit = "return false";
+    form.onsubmit = function () { return false };
     cardDatabase.appendChild(form);
     INPUT_SEARCH_BAR = document.createElement("input");
     INPUT_SEARCH_BAR.setAttribute("type", "text");
@@ -67,8 +67,7 @@ function setSecondColumn(row, i) {
     IMAGE_CARD_DATABASE_DISPLAY.style.height = IMAGE_CARD_DECK_DISPLAY.style.height = CARD_DISPLAY_HEIGHT + "px";
 }
 
-function buildMenuOptionButton(btn, id, func, text)
-{
+function buildMenuOptionButton(btn, id, func, text) {
     btn = document.createElement("button");
     btn.className = "btn";
     btn.id = id;
@@ -76,10 +75,10 @@ function buildMenuOptionButton(btn, id, func, text)
     btn.innerText = text;
     DIV_BUILD_DECK_OPTIONS.appendChild(btn);
     btn.style.width = BUTTON_BUILD_MENU_WIDTH + "px";
+    btn.style.height = BUTOTN_BUILD_MENU_HEIGHT + "px";
 }
 
-function setThirdColumn(row, i)
-{
+function setThirdColumn(row, i) {
     var col = row.insertCell(i);
     DIV_BUILD_DECK_OPTIONS = document.createElement("div");
     DIV_BUILD_DECK_OPTIONS.id = "buildDeckOptions";
@@ -88,34 +87,46 @@ function setThirdColumn(row, i)
     buildMenuOptionButton(BUTTON_NEW_DECK, "makeNewDeck", makeDeck, "New Deck");
     buildMenuOptionButton(BUTTON_GET_LOCAL_DECKS, "getLocalDecks", getLocalDecks, "Get Local Decks");
     buildMenuOptionButton(BUTTON_SAVE_DECK, "saveDeck", saveDeck, "Save Deck");
+    DIV_DECK_LIST = document.createElement("div");
+    DIV_BUILD_DECK_OPTIONS.appendChild(DIV_DECK_LIST);
+    DIV_DECK_LIST.className = "scrollbar";
+    DIV_DECK_LIST.style.width = BUTTON_BUILD_MENU_WIDTH + "px";
+    DIV_DECK_LIST.style.height = window.innerHeight - 3 * BUTOTN_BUILD_MENU_HEIGHT - 2 * GAP_WIDTH + "px";
+    DIV_DECK_LIST.style.display = "initial";
+}
+
+function setFourthColumn(row, i) {
+    var col = row.insertCell(i);
+    DIV_DECK_CONTAINER = document.createElement("div");
+    DIV_DECK_CONTENT = document.createElement("div");
+    col.appendChild(DIV_DECK_CONTAINER);
+    DIV_DECK_CONTAINER.appendChild(DIV_DECK_CONTENT);
+    DIV_DECK_CONTAINER.style.height = window.innerHeight - GAP_WIDTH + "px";
+    DIV_DECK_CONTAINER.className = "scrollbar";
+    DIV_DECK_CONTENT.style.width = DIV_DECK_CONTAINER.style.width = DIV_DECK_CONTENT_WIDTH + "px";
+    DIV_DECK_CONTENT.style.height = window.innerHeight - GAP_WIDTH + "px";
+    DIV_DECK_CONTENT.style.backgroundColor = DEFAULT_BACKGROUND_COLOR;
 }
 
 function buildDeckDisplay() {
-
     var t = document.createElement("table");
     DIV_BUILD_DECK_MENU.appendChild(t);
     var row = t.insertRow(0);
     setFirstColumn(row, 0);
     setSecondColumn(row, 1);
     setThirdColumn(row, 2);
-
+    setFourthColumn(row, 3);
+    displayDatabaseLetters();
 }
 
+
 // ONCLICK:
-// SearchCards
-// MakeNewDeck
 // GetLocalDecks
 // Save Deck
 
 
 
 
-
-// <td>
-//     <div id="deckContentContainer">
-//         <div id="deckContent"></div>
-//     </div>
-// </td>
 // <td> 
 //     <div style="position: absolute; left: 0px; top: 0px; z-index: 6; display: none" id="savePlayerMenu">
 //         <button id="closeMenu" onclick="closePlayerSearch()"></button>
@@ -143,18 +154,9 @@ function buildDeckDisplay() {
 
 
 
-DECK_LIST.style.overflow = "hidden scroll";
-DECK_LIST.style.width = DECK_LIST_WIDTH + "px";
-DECK_LIST.style.height = DECK_LIST_HEIGHT + "px";
-DECK_LIST.style.display = "initial";
 
-DECK_CONTENT.style.overflow = "hidden scroll";
-DECK_CONTENT.style.width = DECK_CONTENT_CONTAINER.style.width = DECK_CONTENT_WIDTH + "px";
-DECK_CONTENT.style.height = DECK_CONTENT_HEIGHT + "px";
-DECK_CONTENT.style.backgroundColor = DEFAULT_BACKGROUND_COLOR;
 
-DECK_CONTENT_CONTAINER.style.height = window.innerHeight - GAP_WIDTH + "px";
-DECK_CONTENT_CONTAINER.style.overflow = "hidden scroll";
+
 
 BUTTON_UPLOADDECK.style.width = BUTTON_SEARCHPLAYER.style.width = BUTTON_SAVEDECK.style.width = BUTTON_DOWNLOADDECK.style.width = OPTION_LIST_WIDTH + "px";
 

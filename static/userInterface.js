@@ -1,7 +1,4 @@
-function displayCard(imageURL)
-{
-    CARD_IMAGE.src = imageURL;
-}
+
 
 function displayDeckCard(url)
 {
@@ -22,35 +19,7 @@ function openCardMenu(e)
     CARD_MENU.style.left = e.clientX + "px";
 }
 
-function makeLabel(cardName, imageURL, type)
-{
-    var label = document.createElement("div");
-    label.innerHTML = cardName;
-    label.style.color = "white";
-    label.style.marginBottom = "2px";
-    label.style.overflow = "hidden";
-    label.style.whiteSpace = "nowrap";
-    label.style.height = LABEL_HEIGHT + "px";
-    label.style.backgroundColor = TYPES[type];
-    label.style.borderRadius = BORDER_RADIUS + "px";
-    label.style.border = "white";
-    label.onclick = function(e)
-    {
-        openCardMenu(e);
-    }
-    label.onmouseenter = function()
-    {
-        SELECTED_CARD = cardName.replace(/\"/g, "\'");
-        displayCard(imageURL);
-        label.style.borderStyle = "solid";
-    }
-    label.onmouseout = function ()
-    {
-        label.style.borderStyle = "";
-    }
-    label.style.width = cardListDisplayer.style.width;
-    return label;
-}
+
 
 var interval = window.setInterval(function()
 {    
@@ -67,60 +36,10 @@ var interval = window.setInterval(function()
     if (PROCESS_DONE) window.clearInterval(interval);
 }, 1000);
 
-function searchCards()
-{
-    var regexMatch = SEARCHBAR.value;
-    var regex = new RegExp(regexMatch, "gi");
-    while (CARD_LIST_DISPLAYER.firstChild)
-    {
-        CARD_LIST_DISPLAYER.removeChild(CARD_LIST_DISPLAYER.firstChild);
-    }
-    if (CARD_LIST)
-    {
-        var cardNames = Object.keys(CARD_LIST);
-        for (i = 0; i < cardNames.length; i++)
-        {
-            var name = cardNames[i];
-            if (name.match(regex) != null)
-            {
-                var cardLabel = makeLabel(name, CARD_LIST[name]["image"], CARD_LIST[name]["type"]);
-                CARD_LIST_DISPLAYER.appendChild(cardLabel);
-            }
-        }
-    }
-}
 
-function initDeck(deckEl, text)
-{
-    deckEl.innerText = text;
-    deckEl.style.width = DECK_LIST_WIDTH;
-    deckEl.style.height = NEW_DECK_HEIGHT;
-    deckEl.style.backgroundColor = DEFAULT_BACKGROUND_COLOR;
-    deckEl.style.borderRadius = BORDER_RADIUS + "px";
-    deckEl.style.border = "white";
-    deckEl.onmouseenter = function ()
-    {
-        deckEl.style.borderStyle = "solid";
-    }
-    deckEl.onmouseout = function()
-    {
-        deckEl.style.borderStyle = "";
-    }
-    deckEl.onclick = function()
-    {
-        openDeck(text);
-    }
-}
 
-function makeDeck()
-{
-    var numOfDecks = DECK_LIST.children.length;
-    var deckName = "Deck " + (numOfDecks+1);
-    var newDeck = document.createElement("div");
-    LOCAL_DECKS[deckName] = {};
-    initDeck(newDeck, deckName);
-    DECK_LIST.appendChild(newDeck);
-}
+
+
 
 function openDeck(name)
 {
@@ -437,3 +356,7 @@ function goToDuelField()
 {
     DUEL_FIELD.style.display = "unset";
 }
+
+
+
+

@@ -18,37 +18,32 @@ function addButtonFunctionality(button) {
     switch (button.id) {
         case "storyMode":
             button.style.backgroundImage = "url('/static/assets/story_mode.jpg')";
-            button.onclick = function()
-            {
+            button.onclick = function () {
                 goToStoryMode();
             }
             break;
         case "freeDuel":
             button.style.backgroundImage = "url('/static/assets/free_duel.jpg')";
-            button.onclick = function()
-            {
+            button.onclick = function () {
                 goToFreeDuel();
             }
             break;
         case "buildDeck":
             button.style.backgroundImage = "url('/static/assets/build_deck.jpg')";
-            button.onclick = function()
-            {
+            button.onclick = function () {
                 goToBuildDeck();
             }
             break;
         case "option":
             button.style.backgroundImage = "url('/static/assets/option.jpg')";
-            button.onclick = function()
-            {
+            button.onclick = function () {
                 goToOption();
             }
             break;
         case "gallery":
         default:
             button.style.backgroundImage = "url('/static/assets/story_mode.jpg')";
-            button.onclick = function()
-            {
+            button.onclick = function () {
                 goToGallery();
             }
             break;
@@ -66,15 +61,13 @@ function makeStdButton(text, divTarget) {
     b.style.backgroundSize = window.innerWidth / 5 + "px " + window.innerHeight + "px";
     b.style.fontSize = MAIN_MENU_FONT_SIZE + "px";
     b.style.color = "white";
-    b.onmouseenter = function() 
-    {
+    b.onmouseenter = function () {
         b.style.opacity = "50%";
         b.innerText = text;
         b.style.animation = "buttonMouseEnter 1s";
         b.style.animationPlayState = "running";
     }
-    b.onmouseout = function()
-    {
+    b.onmouseout = function () {
         b.style.opacity = "100%";
         b.innerText = "";
         b.style.animation = "buttonMouseOut 1s";
