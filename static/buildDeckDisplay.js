@@ -30,6 +30,7 @@ function setFirstColumn(row, i) {
     INPUT_SEARCH_BAR.setAttribute("type", "text");
     INPUT_SEARCH_BAR.id = "searchBar";
     INPUT_SEARCH_BAR.setAttribute("name", "search");
+    INPUT_SEARCH_BAR.oninput = searchCards;
     form.appendChild(INPUT_SEARCH_BAR);
     BUTTON_SEARCH_BAR = document.createElement("button");
     BUTTON_SEARCH_BAR.setAttribute("type", "submit");
@@ -75,7 +76,7 @@ function buildMenuOptionButton(btn, id, func, text) {
     btn.innerText = text;
     DIV_BUILD_DECK_OPTIONS.appendChild(btn);
     btn.style.width = BUTTON_BUILD_MENU_WIDTH + "px";
-    btn.style.height = BUTOTN_BUILD_MENU_HEIGHT + "px";
+    btn.style.height = BUTTON_BUILD_MENU_HEIGHT + "px";
 }
 
 function setThirdColumn(row, i) {
@@ -91,7 +92,7 @@ function setThirdColumn(row, i) {
     DIV_BUILD_DECK_OPTIONS.appendChild(DIV_DECK_LIST);
     DIV_DECK_LIST.className = "scrollbar";
     DIV_DECK_LIST.style.width = BUTTON_BUILD_MENU_WIDTH + "px";
-    DIV_DECK_LIST.style.height = window.innerHeight - 3 * BUTOTN_BUILD_MENU_HEIGHT - 2 * GAP_WIDTH + "px";
+    DIV_DECK_LIST.style.height = window.innerHeight - 3 * BUTTON_BUILD_MENU_HEIGHT - 2 * GAP_WIDTH + "px";
     DIV_DECK_LIST.style.display = "initial";
 }
 
