@@ -3,6 +3,7 @@ var DIV_MAIN_TITLE = document.getElementById("mainTitle");
 var DIV_MAIN_MENU = document.getElementById("mainMenu");
 var DIV_BUILD_DECK_MENU = document.getElementById("buildDeckMenu");
 var DIV_POPUP_PERMISSION = document.getElementById("popupPermission");
+var DIV_NOTIFICATION = document.getElementById("notification");
 var DIV_CARD_LIST_DISPLAY;
 var DIV_DECK_CONTAINER;
 var DIV_DECK_CONTENT;
@@ -17,6 +18,7 @@ var BUTTON_SEARCH_BAR;
 var BUTTON_NEW_DECK;
 var BUTTON_GET_LOCAL_DECKS;
 var BUTTON_SAVE_DECK;
+var BUTTON_RENAME_DECK;
 var BUTTON_YES;
 var BUTTON_NO;
 var INPUT_SEARCH_BAR;
@@ -24,6 +26,7 @@ var IMAGE_CARD_DATABASE_DISPLAY;
 var IMAGE_CARD_DECK_DISPLAY;
 var DIV_BUILD_DECK_OPTIONS;
 var OPENED_CARD_LIST;
+var MENU_CARD = document.getElementById("cardMenu");
 
 var DEFAULT_BACKGROUND_COLOR = "#191919";
 
@@ -33,6 +36,7 @@ var MAIN_TITLE_FONT_SIZE = 40;
 var MAIN_TITLE_FADE_TIME = 1;
 var MAIN_MENU_FONT_SIZE = 20;
 var BUTTON_FADE_TIME = 0.25;
+var NOTIFICATION_FADE_TIME = 5;
 var BUTTON_SEARCH_DIMENSION = 25;
 var BUTTON_BUILD_MENU_WIDTH = 100;
 var BUTTON_BUILD_MENU_HEIGHT = 25;
@@ -44,10 +48,13 @@ var CARD_LIST_HEIGHT = 20;
 var CARD_RATIO = 421 / 614;
 var CARD_DISPLAY_HEIGHT = window.innerHeight / 2 - 2 * BORDER_RADIUS;
 var CARD_DISPLAY_WIDTH = CARD_RATIO * CARD_DISPLAY_HEIGHT;
+var CARD_TYPE_WIDTH = 100;
 var DIV_DECK_CONTENT_WIDTH = window.innerWidth - BUTTON_BUILD_MENU_WIDTH - CARD_DISPLAY_WIDTH - DIV_CARD_LIST_WIDTH;
 var LETTER_DROP_DOWN_HEIGHT = 30;
 var LETTER_DROP_DOWN_FONT_SIZE = 19;
 var LETTER_DROP_DOWN_BORDER_RADIUS = 10;
+var MENU_WIDTH = 20;
+var SCROLL_BAR_WIDTH = 10;
 
 
 var API_REQUEST = new XMLHttpRequest();
@@ -97,16 +104,29 @@ var CARD_DATABASE = {};
 var LOCAL_DECKS = {};
 
 var REQUEST_ALL_LOCAL_DECKS = 100;
+var REQUEST_DECK_SAVED = 101;
+
+var SELECTED_DECK;
+var SELECTED_DECK_NAME;
+var PREV_E_PAGE_Y = 0;
+
+
+
+
+
+
+
+
+
+
 
 
 
 
 var BUTTON_UPLOADDECK = document.getElementById("uploadDeck");
-var BUTTON_DOWNLOADDECK = document.getElementById("downloadDeck");
 var BUTTON_SEARCHPLAYER = document.getElementById("searchPlayer");
 var BUTTON_CLOSEMENU = document.getElementById("closeMenu");
 var BUTTON_REFRESH_LIST = document.getElementById("refreshPlayerList");
-var CARD_MENU = document.getElementById("cardMenu");
 var DECK_MENU = document.getElementById("deckMenu");
 var DUEL_MENU = document.getElementById("duelMenu");
 var PLAYER_LIST = document.getElementById("playerList");
@@ -117,8 +137,6 @@ var DUEL_FIELD = document.getElementById("duelField");
 
 var PLAYER_NAME;
 var TARGET_DUELIST;
-var SELECTED_DECK;
-var SELECTED_DECK_NAME;
 var SELECTED_CARD;
 var DUELISTS = [];
 var DUELING_DECK;

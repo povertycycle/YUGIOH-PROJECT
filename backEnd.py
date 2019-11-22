@@ -32,8 +32,7 @@ def getAllLocalDecks():
                 files[item.split('.')[0]] = data
     return jsonify(code=REQUEST_CODES["ALL_LOCAL_DECKS"], files=files)
 
-
-@app.route('/downloadDeck/<deck_name>;<deck_json>')
+@app.route('/saveDeck/<deck_name>;<deck_json>')
 def downloadDeck(deck_name, deck_json):
     global REQUEST_CODES   
 
@@ -44,7 +43,16 @@ def downloadDeck(deck_name, deck_json):
         deck = json.loads(deck_json)
         json.dump(deck, outfile)
     
-    return jsonify(code=REQUEST_CODES["DOWNLOAD_DECK"], files=None)
+    return jsonify(code=REQUEST_CODES["DECK_SAVED"], files=None)
+
+
+
+
+
+
+
+
+
 
 @app.route('/savePlayerName/<player_name>')
 def savePlayerName(player_name):
@@ -92,8 +100,8 @@ if __name__ == '__main__':
 
     REQUEST_CODES = {
         "ALL_LOCAL_DECKS" : 100,
-        "LOCAL_DECK" : 101,
-        "DOWNLOAD_DECK" : 200,
+        "DECK_SAVED" : 101,
+
         "REGISTER_PLAYER_SUCESS": 300,
         "REGISTER_PLAYER_FAIL": 301,
         "GET_PLAYER_LIST": 302,

@@ -41,6 +41,7 @@ function setFirstColumn(row, i) {
     DIV_CARD_LIST_DISPLAY = document.createElement("div");
     DIV_CARD_LIST_DISPLAY.id = "cardlistDisplay";
     DIV_CARD_LIST_DISPLAY.className = "scrollbar";
+    DIV_CARD_LIST_DISPLAY.onmouseout = function () { hideCardMenu(); }
     cardDatabase.appendChild(DIV_CARD_LIST_DISPLAY);
 
     INPUT_SEARCH_BAR.style.width = DIV_CARD_LIST_WIDTH - BUTTON_SEARCH_DIMENSION + "px";
@@ -88,6 +89,7 @@ function setThirdColumn(row, i) {
     buildMenuOptionButton(BUTTON_NEW_DECK, "makeNewDeck", makeDeck, "New Deck");
     buildMenuOptionButton(BUTTON_GET_LOCAL_DECKS, "getLocalDecks", getLocalDecks, "Get Local Decks");
     buildMenuOptionButton(BUTTON_SAVE_DECK, "saveDeck", saveDeck, "Save Deck");
+    buildMenuOptionButton(BUTTON_RENAME_DECK, "renameDeck", renameDeck, "Rename Deck");
     DIV_DECK_LIST = document.createElement("div");
     DIV_BUILD_DECK_OPTIONS.appendChild(DIV_DECK_LIST);
     DIV_DECK_LIST.className = "scrollbar";
@@ -107,6 +109,11 @@ function setFourthColumn(row, i) {
     DIV_DECK_CONTENT.style.width = DIV_DECK_CONTAINER.style.width = DIV_DECK_CONTENT_WIDTH + "px";
     DIV_DECK_CONTENT.style.height = window.innerHeight - GAP_WIDTH + "px";
     DIV_DECK_CONTENT.style.backgroundColor = DEFAULT_BACKGROUND_COLOR;
+    DIV_DECK_CONTENT.id = "deckContent";
+    DIV_DECK_CONTENT.onmouseout = function () { hideCardMenu(); }
+    DIV_DECK_CONTENT.style.overflow = "hidden";
+    DIV_DECK_CONTENT.style.textOverflow = "elipsis";
+    DIV_DECK_CONTENT.style.whiteSpace = "nowrap";
 }
 
 function buildDeckDisplay() {
@@ -119,10 +126,6 @@ function buildDeckDisplay() {
     setFourthColumn(row, 3);
     displayDatabaseLetters();
 }
-
-
-// ONCLICK:
-// Save Deck
 
 
 
@@ -143,35 +146,22 @@ function buildDeckDisplay() {
 // <td>
 //     <div id="duelField" style="display: none; position: absolute; top:0px; left:0px; background-color: white; z-index: 50;"></div>
 // </td>
+// DUEL_MENU.style.width = window.innerWidth + "px";
+// DUEL_MENU.style.height = window.innerHeight + "px";
+// DUEL_MENU.style.position = "absolute";
+// DUEL_MENU.style.display = "none";
+// DUEL_MENU.style.top = DUEL_MENU.style.left = "0px";
+// DUEL_MENU.style.backgroundColor = DEFAULT_BACKGROUND_COLOR;
+// DUEL_MENU.style.zIndex = 5;
+
+// BUTTON_CLOSEMENU.style.width = BUTTON_CLOSEMENU.style.height = BUTTON_HEIGHT + "px";
+// BUTTON_CLOSEMENU.style.position = "absolute";
+// BUTTON_CLOSEMENU.style.left = window.innerWidth - BUTTON_HEIGHT + "px";
+// BUTTON_CLOSEMENU.style.top = 0 + "px";
+
+// SAVE_PLAYER_MENU.style.top = BUTTON_HEIGHT + "px";
 
 
 
-
-
-
-
-
-
-
-
-BUTTON_UPLOADDECK.style.width = BUTTON_SEARCHPLAYER.style.width = BUTTON_SAVEDECK.style.width = BUTTON_DOWNLOADDECK.style.width = OPTION_LIST_WIDTH + "px";
-
-DUEL_MENU.style.width = window.innerWidth + "px";
-DUEL_MENU.style.height = window.innerHeight + "px";
-DUEL_MENU.style.position = "absolute";
-DUEL_MENU.style.display = "none";
-DUEL_MENU.style.top = DUEL_MENU.style.left = "0px";
-DUEL_MENU.style.backgroundColor = DEFAULT_BACKGROUND_COLOR;
-DUEL_MENU.style.zIndex = 5;
-
-BUTTON_CLOSEMENU.style.width = BUTTON_CLOSEMENU.style.height = BUTTON_HEIGHT + "px";
-BUTTON_CLOSEMENU.style.position = "absolute";
-BUTTON_CLOSEMENU.style.left = window.innerWidth - BUTTON_HEIGHT + "px";
-BUTTON_CLOSEMENU.style.top = 0 + "px";
-
-SAVE_PLAYER_MENU.style.top = BUTTON_HEIGHT + "px";
-
-
-
-DUEL_FIELD.style.width = window.innerWidth + "px";
-DUEL_FIELD.style.height = window.innerHeight + "px";
+// DUEL_FIELD.style.width = window.innerWidth + "px";
+// DUEL_FIELD.style.height = window.innerHeight + "px";

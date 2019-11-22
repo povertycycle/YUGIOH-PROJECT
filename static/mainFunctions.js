@@ -129,4 +129,18 @@ function initializeMainMenu() {
     BUTTON_YES.style.fontSize = BUTTON_NO.style.fontSize = LETTER_DROP_DOWN_FONT_SIZE + "px";
     BUTTON_YES.style.borderRadius = BUTTON_NO.style.borderRadius = LETTER_DROP_DOWN_BORDER_RADIUS + "px";
     DIV_POPUP_PERMISSION.appendChild(bdiv);
+
+    DIV_NOTIFICATION.style.position = "absolute";
+    DIV_NOTIFICATION.style.display = "none";
+    DIV_NOTIFICATION.style.zIndex = 100;
+    DIV_NOTIFICATION.style.width = DIV_POPUP_WIDTH + "px";
+    DIV_NOTIFICATION.style.height = DIV_POPUP_HEIGHT + "px";
+    DIV_NOTIFICATION.style.left = window.innerWidth / 2 - DIV_POPUP_WIDTH / 2 + "px";
+    DIV_NOTIFICATION.style.top = window.innerHeight / 2 - DIV_POPUP_HEIGHT / 2 + "px";
+    DIV_NOTIFICATION.style.background = DEFAULT_BACKGROUND_COLOR;
+    DIV_NOTIFICATION.style.border = "white";
+    DIV_NOTIFICATION.style.borderRadius = LETTER_DROP_DOWN_BORDER_RADIUS + "px";
+    DIV_NOTIFICATION.style.borderStyle = "solid";
+    DIV_NOTIFICATION.style.lineHeight = DIV_POPUP_HEIGHT + "px";
+    DIV_NOTIFICATION.style.textAlign = "center";
 }

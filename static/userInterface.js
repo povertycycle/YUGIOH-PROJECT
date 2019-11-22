@@ -1,9 +1,5 @@
 
 
-function displayDeckCard(url)
-{
-    DECK_CARD_IMAGE.src = url;
-}
 
 function openDeckMenu(e)
 {
@@ -12,93 +8,9 @@ function openDeckMenu(e)
     DECK_MENU.style.left = e.clientX + "px";
 }
 
-function openCardMenu(e)
-{
-    CARD_MENU.style.display = "unset";
-    CARD_MENU.style.top = e.clientY + "px";
-    CARD_MENU.style.left = e.clientX + "px";
-}
 
 
 
-
-function openDeck(name)
-{
-    console.log("Opening deck " + name + " ...")
-    while(DECK_CONTENT.firstChild)
-    {
-        DECK_CONTENT.removeChild(DECK_CONTENT.firstChild);
-    }
-    SELECTED_DECK = LOCAL_DECKS[name];
-    SELECTED_DECK_NAME = name;
-    var l = Object.keys(SELECTED_DECK);
-    for (item of l)
-    {
-        for (i = 0; i < SELECTED_DECK[item]; i++)
-        {
-            var card = document.createElement("div");
-            initializeCardDiv(card, item);
-            var id = document.createAttribute("id");
-            id.value = item;
-            card.setAttributeNode(id);
-            DECK_CONTENT.appendChild(card);
-        }
-    }
-}
-
-function initializeCardDiv(card, text)
-{
-    card.style.width = DECK_CONTENT.style.width;
-    card.style.height = DECK_CARD_LIST_HEIGHT + "px";
-    card.style.backgroundColor = TYPES[CARD_LIST[text.replace(/\'/g, "\"")]["type"]];
-    card.innerText = text;
-    card.style.borderRadius = BORDER_RADIUS + "px";
-    card.style.border = "white";
-    
-    card.onmouseenter = function()
-    {
-        SELECTED_DECK_CARD = text;
-        displayDeckCard(CARD_LIST[text.replace(/\'/g, "\"")]["image"]);
-        card.style.borderStyle = "solid";
-    }
-    card.onmouseout = function()
-    {
-        card.style.borderStyle = "";
-    }
-    card.onclick = function(e)
-    {
-        openDeckMenu(e);
-    }
-}
-
-function addToDeck()
-{
-    SELECTED_DECK[SELECTED_CARD] ? SELECTED_DECK[SELECTED_CARD] += 1 : SELECTED_DECK[SELECTED_CARD] = 1;
-    var card = document.createElement("div");
-    var id = document.createAttribute("id");
-    id.value = SELECTED_CARD;
-    card.setAttributeNode(id);
-    initializeCardDiv(card, SELECTED_CARD);    
-    DECK_CONTENT.appendChild(card);
-}
-
-function removeFromDeck()
-{
-    console.log(SELECTED_DECK_CARD);
-    SELECTED_DECK[SELECTED_DECK_CARD] - 1 == 0 ? delete SELECTED_DECK[SELECTED_DECK_CARD] : SELECTED_DECK[SELECTED_DECK_CARD] -= 1;
-    DECK_CONTENT.removeChild(document.getElementById(SELECTED_DECK_CARD))
-}
-
-function saveDeck()
-{
-    LOCAL_DECKS[SELECTED_DECK_NAME] = SELECTED_DECK;
-}
-
-function downloadDeck()
-{
-    DECK_REQUEST.open('GET', 'downloadDeck/'+JSON.stringify(SELECTED_DECK_NAME)+";"+JSON.stringify(SELECTED_DECK))
-    DECK_REQUEST.send();
-}
 
 
 
