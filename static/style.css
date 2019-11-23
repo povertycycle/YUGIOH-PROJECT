@@ -84,8 +84,7 @@
 
 .scrollbar 
 {
-    overflow-y: scroll; 
-    overflow-x: hidden 
+    overflow: scroll
 }
 
 .cardMenu
@@ -100,19 +99,19 @@ menu
 	display:block;
 	left:0px;
 	top:0px;
-	height:20px;
-	width:20px;
 	padding:0;
 	margin:0;
-	border:1px solid;
-	background-color:#191919;
 	font-weight:normal;
 	white-space:nowrap;
 }
 
+.opt
+{
+	background: #191919;
+}
+
 menu:hover
 {
-	background-color:#101010;
 	font-weight:bold;
 }
 
@@ -135,66 +134,20 @@ menu[title]:before
 	content:attr(title);
 }
 
-menu:not([title]):before
+.t-left
 {
-	content:"\2630";
+	width: 0;
+	height: 0;
+	border-top: 10px solid transparent;
+	border-right: 20px solid #555;
+	border-bottom: 10px solid transparent;
 }
 
-
-
-
-
-
-*
+.t-right
 {
-    box-sizing: border-box;
+	width: 0;
+	height: 0;
+	border-top: 10px solid transparent;
+	border-left: 20px solid #555;
+	border-bottom: 10px solid transparent;
 }
-
-form.example input[type=text] 
-{
-    padding: 10px;
-    font-size: 17px;
-    border: 1px solid grey;
-    float: left;
-    background: #f1f1f1;
-}
-
-form.example button 
-{
-    float: left;
-    width: 20%;
-    padding: 10px;
-    background: #2196F3;
-    color: white;
-    font-size: 17px;
-    border: 1px solid grey;
-    border-left: none;
-    cursor: pointer;
-}
-
-form.example button:hover
-{
-    background: #0b7dda;
-}
-  
-
-
-
-
-.upload-btn-wrapper 
-{
-    position: relative;
-    overflow: hidden;
-    display: inline-block;
-}
-
-
-.upload-btn-wrapper input[type=file] 
-{
-    font-size: 100px;
-    position: absolute;
-    left: 0;
-    top: 0;
-    opacity: 0;
-}
-

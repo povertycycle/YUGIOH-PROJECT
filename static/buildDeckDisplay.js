@@ -21,7 +21,6 @@ function setFirstColumn(row, i) {
     DIV_CARD_LIST_DISPLAY = document.createElement("div");
     DIV_CARD_LIST_DISPLAY.id = "cardlistDisplay";
     DIV_CARD_LIST_DISPLAY.className = "scrollbar";
-    DIV_CARD_LIST_DISPLAY.onmouseout = function () { hideCardMenu(); }
     cardDatabase.appendChild(DIV_CARD_LIST_DISPLAY);
 
     INPUT_SEARCH_BAR.style.width = DIV_CARD_LIST_WIDTH - BUTTON_SEARCH_DIMENSION + "px";
@@ -87,12 +86,11 @@ function setFourthColumn(row, i) {
     DIV_DECK_CONTAINER.appendChild(DIV_DECK_CONTENT);
     DIV_DECK_CONTAINER.style.height = window.innerHeight - GAP_WIDTH + "px";
     DIV_DECK_CONTAINER.className = "scrollbar";
-    DIV_DECK_CONTENT.style.width = DIV_DECK_CONTAINER.style.width = DIV_DECK_CONTENT_WIDTH + "px";
+    DIV_DECK_CONTAINER.style.width = DIV_DECK_CONTENT_WIDTH + "px";
+    DIV_DECK_CONTENT.style.width = "fit-content";
     DIV_DECK_CONTENT.style.height = window.innerHeight - GAP_WIDTH + "px";
     DIV_DECK_CONTENT.style.backgroundColor = DEFAULT_BACKGROUND_COLOR;
     DIV_DECK_CONTENT.id = "deckContent";
-    DIV_DECK_CONTENT.onmouseout = function () { hideCardMenu(); }
-    DIV_DECK_CONTENT.style.overflow = "hidden";
     DIV_DECK_CONTENT.style.textOverflow = "elipsis";
     DIV_DECK_CONTENT.style.whiteSpace = "nowrap";
 }

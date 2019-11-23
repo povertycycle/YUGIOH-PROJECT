@@ -70,7 +70,6 @@ function cardLabel(name, type) {
     label.style.border = "white";
     label.style.fontSize = LETTER_DROP_DOWN_FONT_SIZE / 2 + "px";
     label.className = "cardDB";
-    label.style.width = DIV_CARD_LIST_WIDTH + "px";
     return label;
 }
 
@@ -179,7 +178,7 @@ async function getAllLocalDecks(name, deck) {
 
 function initCardDiv(card, text) {
     var cType = CARD_DATABASE[text]["type"];
-    card.style.width = DIV_DECK_CONTENT.style.width;
+    card.style.width = CARD_TYPE_WIDTH * 3 + DIV_CARD_LIST_WIDTH + "px";
     card.style.height = CARD_LIST_HEIGHT + "px";
     card.style.background = TYPES[cType];
     card.style.borderRadius = BORDER_RADIUS + "px";
@@ -197,6 +196,21 @@ function initCardDiv(card, text) {
     cardType.style.width = CARD_TYPE_WIDTH + "px";
     cardType.innerText = cType;
     card.appendChild(cardType);
+    if (cType === "Spell Card" || cType === "Trap Card") {
+        var effect = document.createElement("div");
+        effect.style.width = CARD_TYPE_WIDTH * 2 + "px";
+        effect.innerText = CARD_DATABASE[text]["race"];
+        card.appendChild(effect);
+    }
+    else {
+        var atk = document.createElement("div");
+        var def = document.createElement("div");
+        atk.style.width = def.style.width = CARD_TYPE_WIDTH + "px";
+        atk.innerText = "ATK: " + CARD_DATABASE[text]["atk"];
+        def.innerText = "DEF: " + CARD_DATABASE[text]["def"];
+        card.appendChild(atk);
+        card.appendChild(def);
+    }
 }
 
 function openDeck(name) {
@@ -232,16 +246,15 @@ function openDeck(name) {
 function openCardMenu(e) {
     var targetPool = e.currentTarget.parentNode.id;
     if (targetPool === "deckContent") {
-        MENU_CARD.style.left = DIV_CARD_LIST_WIDTH + CARD_DISPLAY_WIDTH + BUTTON_BUILD_MENU_WIDTH - MENU_WIDTH + GAP_WIDTH + "px";
+        MENU_CARD.className = "t-right cardMenu"
+        MENU_CARD.style.left = MENU_LEFT_DECK_CONTENT + "px";
     }
     else {
-        MENU_CARD.style.left = DIV_CARD_LIST_WIDTH - SCROLL_BAR_WIDTH - MENU_WIDTH + 3 * GAP_WIDTH + "px";
+        MENU_CARD.className = "t-left cardMenu"
+        MENU_CARD.style.left = DIV_CARD_LIST_WIDTH - MENU_WIDTH - SCROLL_BAR_WIDTH + "px";
     }
     MENU_CARD.style.display = "unset";
     MENU_CARD.style.top = e.pageY + "px";
-}
-function hideCardMenu() {
-    MENU_CARD.style.display = "unset";
 }
 
 function addToDeck() {
@@ -266,11 +279,15 @@ function saveDeck() {
 function renameDeck() {
     DIV_INPUT_PROMPT.innerText = "Enter name:"
     DIV_INPUT_MENU.style.display = "unset";
-    
+
 }
 
 function backToMainMenu() {
     DIV_BUILD_DECK_MENU.style.animation = "fadeOut " + MAIN_TITLE_FADE_TIME + "s";
+    while (OPENED_CARD_LIST && OPENED_CARD_LIST.childNodes.length > 1) {
+        OPENED_CARD_LIST.removeChild(OPENED_CARD_LIST.lastChild);
+    }
+    MENU_CARD.style.display = "none";
 }
 
 DECK_REQUEST.onload = async function () {
@@ -280,6 +297,8 @@ DECK_REQUEST.onload = async function () {
             var decks = json["files"];
             var deckNames = Object.keys(decks);
             for (item of deckNames) {
+
+                console.log(item)
                 var res = await getAllLocalDecks(item, decks[item]);
                 if (res == 'n.a.') {
                     var d = document.createElement("div");
@@ -294,7 +313,7 @@ DECK_REQUEST.onload = async function () {
             DIV_NOTIFICATION.innerText = "Deck Saved";
             DIV_NOTIFICATION.style.display = "unset";
             DIV_NOTIFICATION.style.animation = "fadeInOut " + NOTIFICATION_FADE_TIME + "s";
-            
+
         }
         else if (json["code"] == REQUEST_DECK_RENAMED) {
             DIV_NOTIFICATION.style.animation = "fadeIn " + BUTTON_FADE_TIME + "s";

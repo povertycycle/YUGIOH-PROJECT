@@ -107,6 +107,7 @@ function initializeMainMenu() {
         }
     })
 
+    buildDeckDisplay();
 }
 
 DIV_BUILD_DECK_MENU.addEventListener('animationend', function (e) {
@@ -114,19 +115,15 @@ DIV_BUILD_DECK_MENU.addEventListener('animationend', function (e) {
         DIV_BUILD_DECK_MENU.style.display = "none";
         DIV_MAIN_MENU.style.display = "flex";
         DIV_MAIN_MENU.style.animation = "fadeIn " + MAIN_TITLE_FADE_TIME + "s";
-        // for (var i = 0; i < MAIN_MENU_BUTTONS.length; i++)
-        // {
-        //     var txt = MAIN_MENU_BUTTONS[i];
-        //     var btn = document.getElementById((txt.charAt(0).toLowerCase() + txt.substr(1)).replace(" ", ""));
-        //     btn.style.animationDelay = i * BUTTON_FADE_TIME * 1000;
-        //     btn.style.animation = "fadeIn " + BUTTON_FADE_TIME * 10 + "s";
-        //     btn.style.animationPlayState = "running";
-        // }
     }
 })
 
+function goToFreeDuel() {
+    freeDuelDisplay();
+
+}
+
 function goToBuildDeck() {
-    buildDeckDisplay();
     BUTTON_BUILD_DECK = document.getElementById("buildDeck");
     BUTTON_BUILD_DECK.style.animation = "buttonBlinking 0.5s";
     DIV_BUILD_DECK_MENU.style.width = window.innerWidth + "px";

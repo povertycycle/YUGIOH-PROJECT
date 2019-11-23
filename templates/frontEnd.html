@@ -20,12 +20,13 @@
     <div id="notification"></div>
     <div id="inputMenu"></div>
     <menu id="cardMenu" class="cardMenu">
-        <menu title="Add to Deck" onclick="addToDeck()"></menu>
-        <menu title="Remove from Deck" onclick="removeFromDeck()"></menu>
+        <menu class="opt" title="Add to Deck" onclick="addToDeck()"></menu>
+        <menu class="opt" title="Remove from Deck" onclick="removeFromDeck()"></menu>
     </menu>
 </body>
 <script type="text/javascript" src="{{ url_for('static', filename='globalVariables.js') }}"></script>
 <script type="text/javascript" src="{{ url_for('static', filename='buildDeckFunctions.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='freeDuelDisplay.js') }}"></script>
 <script type="text/javascript" src="{{ url_for('static', filename='buildDeckDisplay.js') }}"></script>
 <script type="text/javascript" src="{{ url_for('static', filename='mainFunctions.js') }}"></script>
 <script type="text/javascript" src="{{ url_for('static', filename='mainTitle.js') }}"></script>
