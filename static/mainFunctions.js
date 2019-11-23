@@ -109,8 +109,8 @@ function initializeMainMenu() {
     DIV_TEXT_QUESTION = document.createElement("div");
     DIV_TEXT_QUESTION.style.width = DIV_POPUP_WIDTH + "px";
     DIV_TEXT_QUESTION.style.height = DIV_POPUP_HEIGHT / 2 + "px";
-    DIV_TEXT_QUESTION.style.marginLeft = "-" + BORDER_RADIUS*2 + "px";
-    DIV_TEXT_QUESTION.style.marginTop = "-" + BORDER_RADIUS*2 + "px";
+    DIV_TEXT_QUESTION.style.marginLeft = "-" + BORDER_RADIUS * 2 + "px";
+    DIV_TEXT_QUESTION.style.marginTop = "-" + BORDER_RADIUS * 2 + "px";
     DIV_TEXT_QUESTION.style.borderStyle = "solid";
     DIV_TEXT_QUESTION.style.borderRadius = LETTER_DROP_DOWN_BORDER_RADIUS + "px";
     DIV_POPUP_PERMISSION.appendChild(DIV_TEXT_QUESTION);
@@ -143,4 +143,24 @@ function initializeMainMenu() {
     DIV_NOTIFICATION.style.borderStyle = "solid";
     DIV_NOTIFICATION.style.lineHeight = DIV_POPUP_HEIGHT + "px";
     DIV_NOTIFICATION.style.textAlign = "center";
+
+    DIV_INPUT_MENU.style.position = "absolute";
+    DIV_INPUT_MENU.style.display = "none";
+    DIV_INPUT_MENU.style.zIndex = 100;
+    DIV_INPUT_MENU.style.width = DIV_POPUP_WIDTH + "px";
+    DIV_INPUT_MENU.style.height = DIV_POPUP_HEIGHT + "px";
+    DIV_INPUT_MENU.style.left = window.innerWidth / 2 - DIV_POPUP_WIDTH / 2 + "px";
+    DIV_INPUT_MENU.style.top = window.innerHeight / 2 - DIV_POPUP_HEIGHT / 2 + "px";
+    DIV_INPUT_MENU.style.background = DEFAULT_BACKGROUND_COLOR;
+    DIV_INPUT_MENU.style.border = "white";
+    DIV_INPUT_MENU.style.borderRadius = LETTER_DROP_DOWN_BORDER_RADIUS + "px";
+    DIV_INPUT_MENU.style.borderStyle = "solid";
+    DIV_INPUT_MENU.style.textAlign = "center";
+    DIV_INPUT_MENU.style.paddingTop = DIV_POPUP_HEIGHT / 4 + "px";
+    DIV_INPUT_PROMPT = document.createElement("div");
+    DIV_INPUT_MENU.appendChild(DIV_INPUT_PROMPT);
+    INPUT_PROMPT = document.createElement("input");
+    INPUT_PROMPT.style.height = MAIN_MENU_FONT_SIZE + "px";
+    DIV_INPUT_MENU.appendChild(INPUT_PROMPT);
+
 }

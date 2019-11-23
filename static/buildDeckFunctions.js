@@ -135,7 +135,7 @@ function initDeck(d, text) {
         d.style.borderStyle = "";
     }
     d.onclick = function () {
-        openDeck(text);
+        openDeck(d.innerText);
     }
 }
 
@@ -161,7 +161,9 @@ async function getAllLocalDecks(name, deck) {
             BUTTON_YES.onclick = function () {
                 LOCAL_DECKS[name] = deck;
                 DIV_POPUP_PERMISSION.style.display = "none";
+                console.log("12st");
                 resolve('y');
+
             };
             BUTTON_NO.onclick = function () {
                 DIV_POPUP_PERMISSION.style.display = "none";
@@ -263,7 +265,38 @@ function saveDeck() {
 }
 
 function renameDeck() {
-
+    DIV_INPUT_PROMPT.innerText = "Enter name:"
+    DIV_INPUT_MENU.style.display = "unset";
+    INPUT_PROMPT.addEventListener("keyup", function (event) {
+        if (event.keyCode === 13) {
+            event.preventDefault();
+            DIV_TEXT_QUESTION.innerText = "Are you sure you want to change the name to: " + INPUT_PROMPT.value + "?";
+            DIV_INPUT_MENU.style.display = "none";
+            DIV_POPUP_PERMISSION.style.display = "unset";
+            BUTTON_YES.onclick = function () {
+                var prevName = SELECTED_DECK_NAME;
+                if (LOCAL_DECKS[SELECTED_DECK_NAME]) {
+                    var decklists = DIV_DECK_LIST.children;
+                    for (var j = 0; j < decklists.length; j++) {
+                        if (decklists[j].innerText === SELECTED_DECK_NAME) {
+                            decklists[j].innerText = INPUT_PROMPT.value;
+                        }
+                    }
+                    var deck = LOCAL_DECKS[SELECTED_DECK_NAME];
+                    LOCAL_DECKS[INPUT_PROMPT.value] = deck;
+                    delete LOCAL_DECKS[SELECTED_DECK_NAME];
+                }
+                SELECTED_DECK_NAME = INPUT_PROMPT.value;
+                DIV_POPUP_PERMISSION.style.display = "none";
+                DECK_REQUEST.open('GET', '/renameDeck/' + JSON.stringify(prevName) + ";" + JSON.stringify(SELECTED_DECK_NAME));
+                DECK_REQUEST.send();
+            };
+            BUTTON_NO.onclick = function () {
+                DIV_INPUT_MENU.style.display = "none";
+                DIV_POPUP_PERMISSION.style.display = "none";
+            };
+        }
+    });
 }
 
 DECK_REQUEST.onload = async function () {
@@ -285,6 +318,15 @@ DECK_REQUEST.onload = async function () {
 
             DIV_NOTIFICATION.style.animation = "fadeIn " + BUTTON_FADE_TIME + "s";
             DIV_NOTIFICATION.innerText = "Deck Saved";
+            DIV_NOTIFICATION.style.display = "unset";
+            DIV_NOTIFICATION.style.animation = "fadeInOut " + NOTIFICATION_FADE_TIME + "s";
+            DIV_NOTIFICATION.addEventListener('animationend', function () {
+                DIV_NOTIFICATION.style.display = "none";
+            })
+        }
+        else if (json["code"] == REQUEST_DECK_RENAMED) {
+            DIV_NOTIFICATION.style.animation = "fadeIn " + BUTTON_FADE_TIME + "s";
+            DIV_NOTIFICATION.innerText = "Deck Renamed";
             DIV_NOTIFICATION.style.display = "unset";
             DIV_NOTIFICATION.style.animation = "fadeInOut " + NOTIFICATION_FADE_TIME + "s";
             DIV_NOTIFICATION.addEventListener('animationend', function () {

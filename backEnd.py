@@ -38,15 +38,22 @@ def downloadDeck(deck_name, deck_json):
 
     trimmed = deck_name.split('\"')[1]
     PATH = 'decks/'+trimmed+".json"
-    print(json.loads(deck_json))
     with open(PATH, 'w+') as outfile:
         deck = json.loads(deck_json)
         json.dump(deck, outfile)
     
     return jsonify(code=REQUEST_CODES["DECK_SAVED"], files=None)
 
+@app.route('/renameDeck/<prev_name>;<new_name>')
+def renameDeck(prev_name, new_name):
+    global REQUEST_CODES
 
+    t_prev = prev_name.split('\"')[1]
+    t_new = new_name.split('\"')[1]
+    PATH = 'decks/'
+    os.rename(r''+PATH+t_prev+'.json',r''+PATH+t_new+'.json')
 
+    return jsonify(code=REQUEST_CODES["DECK_RENAMED"], files=None)
 
 
 
@@ -101,12 +108,12 @@ if __name__ == '__main__':
     REQUEST_CODES = {
         "ALL_LOCAL_DECKS" : 100,
         "DECK_SAVED" : 101,
+        "DECK_RENAMED" : 102,
 
         "REGISTER_PLAYER_SUCESS": 300,
         "REGISTER_PLAYER_FAIL": 301,
         "GET_PLAYER_LIST": 302,
     }
-    print()
     # FILENAME = "http://localhost:5000/"
     # webbrowser.open_new_tab(FILENAME)
-    socketio.run(app, debug=True)
+    socketio.run(app)

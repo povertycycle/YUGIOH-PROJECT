@@ -4,6 +4,8 @@ var DIV_MAIN_MENU = document.getElementById("mainMenu");
 var DIV_BUILD_DECK_MENU = document.getElementById("buildDeckMenu");
 var DIV_POPUP_PERMISSION = document.getElementById("popupPermission");
 var DIV_NOTIFICATION = document.getElementById("notification");
+var DIV_INPUT_MENU = document.getElementById("inputMenu");
+var DIV_INPUT_PROMPT;
 var DIV_CARD_LIST_DISPLAY;
 var DIV_DECK_CONTAINER;
 var DIV_DECK_CONTENT;
@@ -22,6 +24,7 @@ var BUTTON_RENAME_DECK;
 var BUTTON_YES;
 var BUTTON_NO;
 var INPUT_SEARCH_BAR;
+var INPUT_PROMPT;
 var IMAGE_CARD_DATABASE_DISPLAY;
 var IMAGE_CARD_DECK_DISPLAY;
 var DIV_BUILD_DECK_OPTIONS;
@@ -105,10 +108,10 @@ var LOCAL_DECKS = {};
 
 var REQUEST_ALL_LOCAL_DECKS = 100;
 var REQUEST_DECK_SAVED = 101;
+var REQUEST_DECK_RENAMED = 102;
 
 var SELECTED_DECK;
 var SELECTED_DECK_NAME;
-var PREV_E_PAGE_Y = 0;
 
 
 
@@ -152,8 +155,6 @@ var DECK_LIST_HEIGHT = 1000;
 var DUEL_REQUEST = new XMLHttpRequest();
 var SOCKET = io.connect('http://' + document.domain + ':' + location.port);
 
-var LOCAL_DECK = 101;
-var DOWNLOAD_DECK = 200;
 var REGISTER_PLAYER_SUCESS = 300;
 var REGISTER_PLAYER_FAIL = 301;
 var GET_PLAYER_LIST = 302;
