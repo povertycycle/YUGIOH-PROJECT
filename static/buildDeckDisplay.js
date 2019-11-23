@@ -1,24 +1,4 @@
-function goToBuildDeck() {
-    BUTTON_STORY_MODE = document.getElementById("storyMode");
-    BUTTON_FREE_DUEL = document.getElementById("freeDuel");
-    BUTTON_BUILD_DECK = document.getElementById("buildDeck");
-    BUTTON_OPTION = document.getElementById("option");
-    BUTTON_GALLERY = document.getElementById("gallery");
-    BUTTON_BUILD_DECK.style.animation = "buttonBlinking 0.5s";
-    BUTTON_BUILD_DECK.style.animationPlayState = "running";
-    DIV_BUILD_DECK_MENU.style.width = window.innerWidth + "px";
-    DIV_BUILD_DECK_MENU.style.height = window.innerHeight + "px";
-    DIV_MAIN_MENU.style.animation = "fadeOut " + MAIN_TITLE_FADE_TIME + "s";
-    DIV_MAIN_MENU.style.animationPlayState = "running";
-    DIV_MAIN_MENU.addEventListener('animationend', function (e) {
-        if (e.target.nodeName === "DIV") {
-            DIV_MAIN_MENU.style.display = "none";
-            DIV_BUILD_DECK_MENU.style.animation = "fadeIn " + MAIN_TITLE_FADE_TIME + "s";
-            DIV_BUILD_DECK_MENU.style.display = "";
-            buildDeckDisplay();
-        }
-    })
-}
+
 
 function setFirstColumn(row, i) {
     var cardDatabase = row.insertCell(i);
@@ -90,6 +70,7 @@ function setThirdColumn(row, i) {
     buildMenuOptionButton(BUTTON_GET_LOCAL_DECKS, "getLocalDecks", getLocalDecks, "Get Local Decks");
     buildMenuOptionButton(BUTTON_SAVE_DECK, "saveDeck", saveDeck, "Save Deck");
     buildMenuOptionButton(BUTTON_RENAME_DECK, "renameDeck", renameDeck, "Rename Deck");
+    buildMenuOptionButton(BUTTON_BACK_TO_MAIN_MENU, "backToMainMenu", backToMainMenu, "Main Menu")
     DIV_DECK_LIST = document.createElement("div");
     DIV_BUILD_DECK_OPTIONS.appendChild(DIV_DECK_LIST);
     DIV_DECK_LIST.className = "scrollbar";
@@ -146,6 +127,10 @@ function buildDeckDisplay() {
 // <td>
 //     <div id="duelField" style="display: none; position: absolute; top:0px; left:0px; background-color: white; z-index: 50;"></div>
 // </td>
+// BUTTON_STORY_MODE = document.getElementById("storyMode");
+//     BUTTON_FREE_DUEL = document.getElementById("freeDuel");
+//     BUTTON_OPTION = document.getElementById("option");
+//     BUTTON_GALLERY = document.getElementById("gallery");
 // DUEL_MENU.style.width = window.innerWidth + "px";
 // DUEL_MENU.style.height = window.innerHeight + "px";
 // DUEL_MENU.style.position = "absolute";

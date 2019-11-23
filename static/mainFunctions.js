@@ -85,8 +85,6 @@ function createButtons(k) {
     }, BUTTON_FADE_TIME * 1000);
 }
 
-
-
 function initializeMainMenu() {
     DIV_MAIN_TITLE.style.display = "none";
     DIV_MAIN_MENU.style.backgroundColor = DEFAULT_BACKGROUND_COLOR;
@@ -94,73 +92,46 @@ function initializeMainMenu() {
     DIV_MAIN_MENU.style.height = window.innerHeight + "px";
     DIV_MAIN_MENU.style.display = "flex";
     createButtons(0);
-    DIV_POPUP_PERMISSION.style.position = "absolute";
-    DIV_POPUP_PERMISSION.style.display = "none";
-    DIV_POPUP_PERMISSION.style.zIndex = 100;
-    DIV_POPUP_PERMISSION.style.width = DIV_POPUP_WIDTH + "px";
-    DIV_POPUP_PERMISSION.style.height = DIV_POPUP_HEIGHT + "px";
-    DIV_POPUP_PERMISSION.style.left = window.innerWidth / 2 - DIV_POPUP_WIDTH / 2 + "px";
-    DIV_POPUP_PERMISSION.style.top = window.innerHeight / 2 - DIV_POPUP_HEIGHT / 2 + "px";
-    DIV_POPUP_PERMISSION.style.background = DEFAULT_BACKGROUND_COLOR;
-    DIV_POPUP_PERMISSION.style.border = "white";
-    DIV_POPUP_PERMISSION.style.borderRadius = LETTER_DROP_DOWN_BORDER_RADIUS + "px";
-    DIV_POPUP_PERMISSION.style.borderStyle = "solid";
 
-    DIV_TEXT_QUESTION = document.createElement("div");
-    DIV_TEXT_QUESTION.style.width = DIV_POPUP_WIDTH + "px";
-    DIV_TEXT_QUESTION.style.height = DIV_POPUP_HEIGHT / 2 + "px";
-    DIV_TEXT_QUESTION.style.marginLeft = "-" + BORDER_RADIUS * 2 + "px";
-    DIV_TEXT_QUESTION.style.marginTop = "-" + BORDER_RADIUS * 2 + "px";
-    DIV_TEXT_QUESTION.style.borderStyle = "solid";
-    DIV_TEXT_QUESTION.style.borderRadius = LETTER_DROP_DOWN_BORDER_RADIUS + "px";
-    DIV_POPUP_PERMISSION.appendChild(DIV_TEXT_QUESTION);
-    BUTTON_YES = document.createElement("button");
-    var bdiv = document.createElement("div");
-    bdiv.style.display = "flex";
-    BUTTON_YES.style.width = DIV_POPUP_WIDTH / 2 + "px";
-    BUTTON_YES.style.height = DIV_POPUP_HEIGHT / 2 + "px";
-    BUTTON_YES.innerText = "YES";
-    bdiv.appendChild(BUTTON_YES);
-    BUTTON_NO = document.createElement("button");
-    bdiv.appendChild(BUTTON_NO);
-    BUTTON_NO.style.width = DIV_POPUP_WIDTH / 2 + "px";
-    BUTTON_NO.style.height = DIV_POPUP_HEIGHT / 2 + "px";
-    BUTTON_NO.innerText = "NO";
-    BUTTON_YES.style.fontSize = BUTTON_NO.style.fontSize = LETTER_DROP_DOWN_FONT_SIZE + "px";
-    BUTTON_YES.style.borderRadius = BUTTON_NO.style.borderRadius = LETTER_DROP_DOWN_BORDER_RADIUS + "px";
-    DIV_POPUP_PERMISSION.appendChild(bdiv);
+    DIV_MAIN_MENU.addEventListener('animationend', function (e) {
+        if (e.target.nodeName === "DIV") {
 
-    DIV_NOTIFICATION.style.position = "absolute";
-    DIV_NOTIFICATION.style.display = "none";
-    DIV_NOTIFICATION.style.zIndex = 100;
-    DIV_NOTIFICATION.style.width = DIV_POPUP_WIDTH + "px";
-    DIV_NOTIFICATION.style.height = DIV_POPUP_HEIGHT + "px";
-    DIV_NOTIFICATION.style.left = window.innerWidth / 2 - DIV_POPUP_WIDTH / 2 + "px";
-    DIV_NOTIFICATION.style.top = window.innerHeight / 2 - DIV_POPUP_HEIGHT / 2 + "px";
-    DIV_NOTIFICATION.style.background = DEFAULT_BACKGROUND_COLOR;
-    DIV_NOTIFICATION.style.border = "white";
-    DIV_NOTIFICATION.style.borderRadius = LETTER_DROP_DOWN_BORDER_RADIUS + "px";
-    DIV_NOTIFICATION.style.borderStyle = "solid";
-    DIV_NOTIFICATION.style.lineHeight = DIV_POPUP_HEIGHT + "px";
-    DIV_NOTIFICATION.style.textAlign = "center";
+            if (e.animationName === "fadeOut") {
+                DIV_MAIN_MENU.style.display = "none";
+                if (e.target.id === "goToBuildDeck") {
+                    DIV_BUILD_DECK_MENU.style.display = "";
+                    DIV_BUILD_DECK_MENU.style.animation = "fadeIn " + MAIN_TITLE_FADE_TIME + "s";
+                    DIV_BUILD_DECK_MENU.style.animationPlayState = "running";
+                }
+            }
+        }
+    })
 
-    DIV_INPUT_MENU.style.position = "absolute";
-    DIV_INPUT_MENU.style.display = "none";
-    DIV_INPUT_MENU.style.zIndex = 100;
-    DIV_INPUT_MENU.style.width = DIV_POPUP_WIDTH + "px";
-    DIV_INPUT_MENU.style.height = DIV_POPUP_HEIGHT + "px";
-    DIV_INPUT_MENU.style.left = window.innerWidth / 2 - DIV_POPUP_WIDTH / 2 + "px";
-    DIV_INPUT_MENU.style.top = window.innerHeight / 2 - DIV_POPUP_HEIGHT / 2 + "px";
-    DIV_INPUT_MENU.style.background = DEFAULT_BACKGROUND_COLOR;
-    DIV_INPUT_MENU.style.border = "white";
-    DIV_INPUT_MENU.style.borderRadius = LETTER_DROP_DOWN_BORDER_RADIUS + "px";
-    DIV_INPUT_MENU.style.borderStyle = "solid";
-    DIV_INPUT_MENU.style.textAlign = "center";
-    DIV_INPUT_MENU.style.paddingTop = DIV_POPUP_HEIGHT / 4 + "px";
-    DIV_INPUT_PROMPT = document.createElement("div");
-    DIV_INPUT_MENU.appendChild(DIV_INPUT_PROMPT);
-    INPUT_PROMPT = document.createElement("input");
-    INPUT_PROMPT.style.height = MAIN_MENU_FONT_SIZE + "px";
-    DIV_INPUT_MENU.appendChild(INPUT_PROMPT);
+}
 
+DIV_BUILD_DECK_MENU.addEventListener('animationend', function (e) {
+    if (e.animationName === "fadeOut") {
+        DIV_BUILD_DECK_MENU.style.display = "none";
+        DIV_MAIN_MENU.style.display = "flex";
+        DIV_MAIN_MENU.style.animation = "fadeIn " + MAIN_TITLE_FADE_TIME + "s";
+        // for (var i = 0; i < MAIN_MENU_BUTTONS.length; i++)
+        // {
+        //     var txt = MAIN_MENU_BUTTONS[i];
+        //     var btn = document.getElementById((txt.charAt(0).toLowerCase() + txt.substr(1)).replace(" ", ""));
+        //     btn.style.animationDelay = i * BUTTON_FADE_TIME * 1000;
+        //     btn.style.animation = "fadeIn " + BUTTON_FADE_TIME * 10 + "s";
+        //     btn.style.animationPlayState = "running";
+        // }
+    }
+})
+
+function goToBuildDeck() {
+    buildDeckDisplay();
+    BUTTON_BUILD_DECK = document.getElementById("buildDeck");
+    BUTTON_BUILD_DECK.style.animation = "buttonBlinking 0.5s";
+    DIV_BUILD_DECK_MENU.style.width = window.innerWidth + "px";
+    DIV_BUILD_DECK_MENU.style.height = window.innerHeight + "px";
+    DIV_MAIN_MENU.id = "goToBuildDeck";
+    DIV_MAIN_MENU.style.animation = "fadeOut " + MAIN_TITLE_FADE_TIME + "s";
+    DIV_MAIN_MENU.style.animationDelay = "0.5s";
 }
