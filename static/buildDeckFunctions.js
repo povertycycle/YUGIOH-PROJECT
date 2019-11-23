@@ -230,15 +230,16 @@ function openDeck(name) {
         }
     }
     $('.card').on('mouseenter mouseout', function (e) {
+        console.log(e.currentTarget);
         if (e.type === "mouseenter") {
             var txt = e.currentTarget.id;
             SELECTED_CARD = txt;
             IMAGE_CARD_DECK_DISPLAY.src = CARD_DATABASE[txt.replace(/\'/g, "\"")]["image"];
-            e.currentTarget.style.borderStyle = "solid";
+            e.target.style.borderStyle = "solid";
             openCardMenu(e);
         }
         else if (e.type === "mouseout") {
-            e.currentTarget.style.borderStyle = "";
+            e.target.style.borderStyle = "";
         }
     })
 }
