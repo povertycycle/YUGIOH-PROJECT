@@ -1,9 +1,9 @@
 # YUGIOH-PROJECT
  
-**Work in progess**  
 Browser game with five features based on Yu-Gi-Oh! card game.
 API from https://db.ygoprodeck.com/api-guide/
 
+**Work in progess**  
 <dl>
   <dt>Story Mode</dt>
   <dd> N.A. </dd>
