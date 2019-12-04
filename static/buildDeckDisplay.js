@@ -10,6 +10,7 @@ function setFirstColumn(row, i) {
     INPUT_SEARCH_BAR.setAttribute("type", "text");
     INPUT_SEARCH_BAR.id = "searchBar";
     INPUT_SEARCH_BAR.setAttribute("name", "search");
+    INPUT_SEARCH_BAR.setAttribute("autocomplete", "off");
     INPUT_SEARCH_BAR.oninput = searchCards;
     form.appendChild(INPUT_SEARCH_BAR);
     BUTTON_SEARCH_BAR = document.createElement("button");

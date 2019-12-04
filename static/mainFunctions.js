@@ -102,12 +102,17 @@ function initializeMainMenu() {
                     DIV_BUILD_DECK_MENU.style.display = "";
                     DIV_BUILD_DECK_MENU.style.animation = "fadeIn " + MAIN_TITLE_FADE_TIME + "s";
                     DIV_BUILD_DECK_MENU.style.animationPlayState = "running";
+                } else if (e.target.id === "goToFreeDuel") {
+                    DIV_FREE_DUEL_LOBBY.style.display = "";
+                    DIV_FREE_DUEL_LOBBY.style.animation = "fadeIn " + MAIN_TITLE_FADE_TIME + "s";
+                    DIV_FREE_DUEL_LOBBY.style.animationPlayState = "running";
                 }
             }
         }
     })
 
     buildDeckDisplay();
+    freeDuelDisplay();
 }
 
 DIV_BUILD_DECK_MENU.addEventListener('animationend', function (e) {
@@ -118,9 +123,22 @@ DIV_BUILD_DECK_MENU.addEventListener('animationend', function (e) {
     }
 })
 
-function goToFreeDuel() {
-    freeDuelDisplay();
+DIV_FREE_DUEL_LOBBY.addEventListener('animationend', function (e) { 
+    if (e.animationName === "fadeOut") {
+        DIV_FREE_DUEL_LOBBY.style.display = "none";
+        DIV_MAIN_MENU.style.display = "flex";
+        DIV_MAIN_MENU.style.animation = "fadeIn " + MAIN_TITLE_FADE_TIME + "s";
+    }
+})
 
+function goToFreeDuel() {
+    BUTTON_FREE_DUEL = document.getElementById("freeDuel");
+    BUTTON_FREE_DUEL.style.animation = "buttonBlinking 0.5s";
+    DIV_FREE_DUEL_LOBBY.style.width = window.innerWidth + "px";
+    DIV_FREE_DUEL_LOBBY.style.height = window.innerHeight + "px";
+    DIV_MAIN_MENU.id = "goToFreeDuel";
+    DIV_MAIN_MENU.style.animation = "fadeOut " + MAIN_TITLE_FADE_TIME + "s";
+    DIV_MAIN_MENU.style.animationDelay = "0.5s";
 }
 
 function goToBuildDeck() {

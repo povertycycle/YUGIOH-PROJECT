@@ -110,10 +110,22 @@ function searchCards() {
             var c = Object.keys(CARD_DATABASE);
             for (i = 0; i < c.length; i++) {
                 if (c[i].charAt(0).toLowerCase().match(alp) && c[i].match(regex) != null) {
-                    var l = cardLabel(c[i], CARD_DATABASE[c[i]]["image"], CARD_DATABASE[c[i]]["type"]);
+                    var l = cardLabel(c[i], CARD_DATABASE[c[i]]["type"]);
                     OPENED_CARD_LIST.appendChild(l);
                 }
             }
+            $('.cardDB').on('mouseenter mouseout', function (e) {
+                if (e.type === "mouseenter") {
+                    var txt = e.target.innerText;
+                    SELECTED_CARD = txt.replace(/\"/g, "\'");
+                    e.target.style.borderStyle = "solid";
+                    openCardMenu(e);
+                    IMAGE_CARD_DATABASE_DISPLAY.src = CARD_DATABASE[txt]["image"];
+                }
+                else if (e.type === "mouseout") {
+                    e.target.style.borderStyle = "";
+                }
+            })
         }
     }
     DIV_CARD_LIST_DISPLAY.scrollTop = (alp.charCodeAt(0) - 96) * (LETTER_DROP_DOWN_HEIGHT + GAP_WIDTH + BORDER_RADIUS);
@@ -230,7 +242,6 @@ function openDeck(name) {
         }
     }
     $('.card').on('mouseenter mouseout', function (e) {
-        console.log(e.currentTarget);
         if (e.type === "mouseenter") {
             var txt = e.currentTarget.id;
             SELECTED_CARD = txt;
@@ -263,7 +274,20 @@ function addToDeck() {
     var card = document.createElement("div");
     initCardDiv(card, SELECTED_CARD.replace(/\'/g, "\""));
     card.id = SELECTED_CARD;
+    card.className = "card";
     DIV_DECK_CONTENT.appendChild(card);
+    $('.card').on('mouseenter mouseout', function (e) {
+        if (e.type === "mouseenter") {
+            var txt = e.currentTarget.id;
+            SELECTED_CARD = txt;
+            IMAGE_CARD_DECK_DISPLAY.src = CARD_DATABASE[txt.replace(/\'/g, "\"")]["image"];
+            e.target.style.borderStyle = "solid";
+            openCardMenu(e);
+        }
+        else if (e.type === "mouseout") {
+            e.target.style.borderStyle = "";
+        }
+    })
 }
 
 function removeFromDeck() {

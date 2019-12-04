@@ -2,6 +2,7 @@ var BODY = document.getElementsByTagName("body")[0];
 var DIV_MAIN_TITLE = document.getElementById("mainTitle");
 var DIV_MAIN_MENU = document.getElementById("mainMenu");
 var DIV_BUILD_DECK_MENU = document.getElementById("buildDeckMenu");
+var DIV_FREE_DUEL_LOBBY = document.getElementById("freeDuelLobby");
 var DIV_POPUP_PERMISSION = document.getElementById("popupPermission");
 var DIV_NOTIFICATION = document.getElementById("notification");
 var DIV_INPUT_MENU = document.getElementById("inputMenu");
@@ -11,6 +12,7 @@ var DIV_DECK_CONTAINER;
 var DIV_DECK_CONTENT;
 var DIV_DECK_LIST;
 var DIV_TEXT_QUESTION;
+var DIV_CHAT_LIST_DISPLAY;
 var BUTTON_STORY_MODE;
 var BUTTON_FREE_DUEL;
 var BUTTON_BUILD_DECK;
@@ -60,6 +62,8 @@ var LETTER_DROP_DOWN_BORDER_RADIUS = 10;
 var MENU_WIDTH = 20;
 var MENU_LEFT_DECK_CONTENT = DIV_CARD_LIST_WIDTH + CARD_DISPLAY_WIDTH + BUTTON_BUILD_MENU_WIDTH + 2 * GAP_WIDTH + 5 * BORDER_RADIUS - MENU_WIDTH;
 var SCROLL_BAR_WIDTH = 10;
+var INPUT_CHAT_HEIGHT = 30;
+var INPUT_CHAT_WIDTH = 200;
 
 
 
