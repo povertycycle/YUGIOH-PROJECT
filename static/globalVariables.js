@@ -47,7 +47,8 @@ var BUTTON_SEARCH_DIMENSION = 25;
 var BUTTON_BUILD_MENU_WIDTH = 100;
 var BUTTON_BUILD_MENU_HEIGHT = 25;
 var DIV_CARD_LIST_WIDTH = 300;
-var DIV_CARD_LIST_HEIGHT = window.innerHeight - BUTTON_SEARCH_DIMENSION - 2 * GAP_WIDTH;
+var DIV_CARD_LIST_HEIGHT =
+    window.innerHeight - BUTTON_SEARCH_DIMENSION - 2 * GAP_WIDTH;
 var DIV_POPUP_HEIGHT = 100;
 var DIV_POPUP_WIDTH = 200;
 var CARD_LIST_HEIGHT = 20;
@@ -55,32 +56,42 @@ var CARD_RATIO = 421 / 614;
 var CARD_DISPLAY_HEIGHT = window.innerHeight / 2 - 4 * BORDER_RADIUS;
 var CARD_DISPLAY_WIDTH = CARD_RATIO * CARD_DISPLAY_HEIGHT;
 var CARD_TYPE_WIDTH = 100;
-var DIV_DECK_CONTENT_WIDTH = window.innerWidth - BUTTON_BUILD_MENU_WIDTH - CARD_DISPLAY_WIDTH - DIV_CARD_LIST_WIDTH - GAP_WIDTH * 4;
+var DIV_DECK_CONTENT_WIDTH =
+    window.innerWidth -
+    BUTTON_BUILD_MENU_WIDTH -
+    CARD_DISPLAY_WIDTH -
+    DIV_CARD_LIST_WIDTH -
+    GAP_WIDTH * 4;
+var DIV_PLAYER_LIST_WIDTH = 200;
+var DIV_PLAYER_LIST_HEIGHT = 400;
 var LETTER_DROP_DOWN_HEIGHT = 30;
 var LETTER_DROP_DOWN_FONT_SIZE = 19;
 var LETTER_DROP_DOWN_BORDER_RADIUS = 10;
 var MENU_WIDTH = 20;
-var MENU_LEFT_DECK_CONTENT = DIV_CARD_LIST_WIDTH + CARD_DISPLAY_WIDTH + BUTTON_BUILD_MENU_WIDTH + 2 * GAP_WIDTH + 5 * BORDER_RADIUS - MENU_WIDTH;
+var MENU_LEFT_DECK_CONTENT =
+    DIV_CARD_LIST_WIDTH +
+    CARD_DISPLAY_WIDTH +
+    BUTTON_BUILD_MENU_WIDTH +
+    2 * GAP_WIDTH +
+    5 * BORDER_RADIUS -
+    MENU_WIDTH;
 var SCROLL_BAR_WIDTH = 10;
 var INPUT_CHAT_HEIGHT = 30;
 var INPUT_CHAT_WIDTH = 200;
 
-
-
 var API_REQUEST = new XMLHttpRequest();
 var DECK_REQUEST = new XMLHttpRequest();
+var PLAYER_REQUEST = new XMLHttpRequest();
 
-var MAIN_MENU_BUTTONS =
-    [
-        "Story Mode",
-        "Free Duel",
-        "Build Deck",
-        "Option",
-        "Galery"
-    ];
+var MAIN_MENU_BUTTONS = [
+    "Story Mode",
+    "Free Duel",
+    "Build Deck",
+    "Option",
+    "Galery"
+];
 
-var TYPES =
-{
+var TYPES = {
     "Spell Card": "linear-gradient(to right, #0A6B41 35%, #1D9E74)",
     "Normal Monster": "linear-gradient(to right, #A89137 35%, #FDE68A)",
     "Effect Monster": "linear-gradient(to right, #AA360E 35%, #FF8B53)",
@@ -107,7 +118,7 @@ var TYPES =
     "Pendulum Tuner Effect Monster": "linear-gradient(to right, #FF8B53 35%, #1D9E74)",
     "XYZ Pendulum Effect Monster": "linear-gradient(to right, #000000 35%, #1D9E74)",
     "Pendulum Effect Fusion Monster": "linear-gradient(to right, #A086B7 35%, #1D9E74)",
-    "Pendulum Flip Effect Monster": "linear-gradient(to right, #FF8B53 35%, #1D9E74)",
+    "Pendulum Flip Effect Monster": "linear-gradient(to right, #FF8B53 35%, #1D9E74)"
 };
 
 var CARD_DATABASE = {};
@@ -116,13 +127,13 @@ var LOCAL_DECKS = {};
 var REQUEST_ALL_LOCAL_DECKS = 100;
 var REQUEST_DECK_SAVED = 101;
 var REQUEST_DECK_RENAMED = 102;
+var REGISTER_PLAYER_SUCCESS = 300;
+var REGISTER_PLAYER_DUPLiCATE_NAME = 301;
 
 var SELECTED_DECK;
 var SELECTED_DECK_NAME;
 
-
-
-
+var NAME_CURRENT_PLAYER = "";
 
 
 
@@ -142,7 +153,7 @@ var DUEL_MENU = document.getElementById("duelMenu");
 var PLAYER_LIST = document.getElementById("playerList");
 var PLAYER_NAME_INPUT_TEXT = document.getElementById("inputPlayerName");
 var SAVE_PLAYER_MENU = document.getElementById("savePlayerMenu");
-var DECK_LIST_FOR_DUEL = document.getElementById('deckForDuel');
+var DECK_LIST_FOR_DUEL = document.getElementById("deckForDuel");
 var DUEL_FIELD = document.getElementById("duelField");
 
 var PLAYER_NAME;
@@ -151,19 +162,13 @@ var SELECTED_CARD;
 var DUELISTS = [];
 var DUELING_DECK;
 
-
-
 var DECK_LIST_WIDTH = 150;
 var DECK_CARD_LIST_HEIGHT = 25;
 var NEW_DECK_HEIGHT = 25;
 var DECK_LIST_HEIGHT = 1000;
 
+var SOCKET = io.connect("http://" + document.domain + ":" + location.port);
 
-var DUEL_REQUEST = new XMLHttpRequest();
-var SOCKET = io.connect('http://' + document.domain + ':' + location.port);
-
-var REGISTER_PLAYER_SUCESS = 300;
-var REGISTER_PLAYER_FAIL = 301;
 var GET_PLAYER_LIST = 302;
 
 var PROCESS_DONE = false;

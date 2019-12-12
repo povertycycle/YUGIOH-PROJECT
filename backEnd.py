@@ -55,23 +55,26 @@ def renameDeck(prev_name, new_name):
 
     return jsonify(code=REQUEST_CODES["DECK_RENAMED"], files=None)
 
-
-
-
-
-
-
-@app.route('/savePlayerName/<player_name>')
-def savePlayerName(player_name):
+@app.route('/registerNewPlayer/<player_name>')
+def  registerNewPlayer(player_name):
     global REQUEST_CODES   
     global PLAYER_LIST
     
     playerNames = PLAYER_LIST.keys()
     if player_name in playerNames:
-        return jsonify(code=REQUEST_CODES["REGISTER_PLAYER_FAIL"], files=None)
+        return jsonify(code=REQUEST_CODES["REGISTER_PLAYER_DUPLiCATE_NAME"], files=player_name)
     else:   
         PLAYER_LIST[player_name] = {}
-        return jsonify(code=REQUEST_CODES["REGISTER_PLAYER_SUCESS"], files=None)   
+        return jsonify(code=REQUEST_CODES["REGISTER_PLAYER_SUCCESS"], files=player_name)  
+
+
+
+
+
+
+
+
+
 
 @app.route('/getListofPlayers')
 def getListofPlayers():
@@ -109,9 +112,13 @@ if __name__ == '__main__':
         "ALL_LOCAL_DECKS" : 100,
         "DECK_SAVED" : 101,
         "DECK_RENAMED" : 102,
+        "REGISTER_PLAYER_SUCCESS" : 300,
+        "REGISTER_PLAYER_DUPLiCATE_NAME" : 301,
 
-        "REGISTER_PLAYER_SUCESS": 300,
-        "REGISTER_PLAYER_FAIL": 301,
+
+
+
+
         "GET_PLAYER_LIST": 302,
     }
     # FILENAME = "http://localhost:5000/"

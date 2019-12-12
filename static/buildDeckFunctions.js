@@ -1,8 +1,7 @@
 function showCardList(p, letter) {
     if (letter !== "0-9 ~ #") {
         displayCardDatabase(p, letter.toLowerCase());
-    }
-    else {
+    } else {
         displayCardDatabase(p, /[^a-zA-Z\s:]/)
     }
 }
@@ -89,8 +88,7 @@ function displayCardDatabase(p, regex) {
                 e.target.style.borderStyle = "solid";
                 openCardMenu(e);
                 IMAGE_CARD_DATABASE_DISPLAY.src = CARD_DATABASE[txt]["image"];
-            }
-            else if (e.type === "mouseout") {
+            } else if (e.type === "mouseout") {
                 e.target.style.borderStyle = "";
             }
         })
@@ -121,8 +119,7 @@ function searchCards() {
                     e.target.style.borderStyle = "solid";
                     openCardMenu(e);
                     IMAGE_CARD_DATABASE_DISPLAY.src = CARD_DATABASE[txt]["image"];
-                }
-                else if (e.type === "mouseout") {
+                } else if (e.type === "mouseout") {
                     e.target.style.borderStyle = "";
                 }
             })
@@ -179,8 +176,7 @@ async function getAllLocalDecks(name, deck) {
                 DIV_POPUP_PERMISSION.style.display = "none";
                 resolve('n');
             };
-        }
-        else {
+        } else {
             LOCAL_DECKS[name] = deck;
             resolve('n.a.');
         }
@@ -213,8 +209,7 @@ function initCardDiv(card, text) {
         effect.style.width = CARD_TYPE_WIDTH * 2 + "px";
         effect.innerText = CARD_DATABASE[text]["race"];
         card.appendChild(effect);
-    }
-    else {
+    } else {
         var atk = document.createElement("div");
         var def = document.createElement("div");
         atk.style.width = def.style.width = CARD_TYPE_WIDTH + "px";
@@ -248,8 +243,7 @@ function openDeck(name) {
             IMAGE_CARD_DECK_DISPLAY.src = CARD_DATABASE[txt.replace(/\'/g, "\"")]["image"];
             e.target.style.borderStyle = "solid";
             openCardMenu(e);
-        }
-        else if (e.type === "mouseout") {
+        } else if (e.type === "mouseout") {
             e.target.style.borderStyle = "";
         }
     })
@@ -260,8 +254,7 @@ function openCardMenu(e) {
     if (targetPool === "deckContent") {
         MENU_CARD.className = "t-right cardMenu"
         MENU_CARD.style.left = MENU_LEFT_DECK_CONTENT + "px";
-    }
-    else {
+    } else {
         MENU_CARD.className = "t-left cardMenu"
         MENU_CARD.style.left = DIV_CARD_LIST_WIDTH - MENU_WIDTH - SCROLL_BAR_WIDTH + "px";
     }
@@ -283,8 +276,7 @@ function addToDeck() {
             IMAGE_CARD_DECK_DISPLAY.src = CARD_DATABASE[txt.replace(/\'/g, "\"")]["image"];
             e.target.style.borderStyle = "solid";
             openCardMenu(e);
-        }
-        else if (e.type === "mouseout") {
+        } else if (e.type === "mouseout") {
             e.target.style.borderStyle = "";
         }
     })
@@ -322,8 +314,6 @@ DECK_REQUEST.onload = async function () {
             var decks = json["files"];
             var deckNames = Object.keys(decks);
             for (item of deckNames) {
-
-                console.log(item)
                 var res = await getAllLocalDecks(item, decks[item]);
                 if (res == 'n.a.') {
                     var d = document.createElement("div");
@@ -331,16 +321,13 @@ DECK_REQUEST.onload = async function () {
                     DIV_DECK_LIST.appendChild(d);
                 }
             }
-        }
-        else if (json["code"] == REQUEST_DECK_SAVED) {
-
+        } else if (json["code"] == REQUEST_DECK_SAVED) {
             DIV_NOTIFICATION.style.animation = "fadeIn " + BUTTON_FADE_TIME + "s";
             DIV_NOTIFICATION.innerText = "Deck Saved";
             DIV_NOTIFICATION.style.display = "unset";
             DIV_NOTIFICATION.style.animation = "fadeInOut " + NOTIFICATION_FADE_TIME + "s";
 
-        }
-        else if (json["code"] == REQUEST_DECK_RENAMED) {
+        } else if (json["code"] == REQUEST_DECK_RENAMED) {
             DIV_NOTIFICATION.style.animation = "fadeIn " + BUTTON_FADE_TIME + "s";
             DIV_NOTIFICATION.innerText = "Deck Renamed";
             DIV_NOTIFICATION.style.display = "unset";
