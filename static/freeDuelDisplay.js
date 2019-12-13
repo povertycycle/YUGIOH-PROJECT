@@ -1,10 +1,38 @@
+function challengeToDuel() {
+
+}
+
+function setDuelSettingsUI(row, i) {
+  var duelSettingsContainer = row.insertCell(i);
+  duelSettingsContainer.className = "duel_settings_container";
+  $('td.duel_settings_container').css({
+    width: DIV_DUEL_SETTINGS_WIDTH + "px",
+    height: window.innerHeight - GAP_WIDTH + "px",
+    background: DEFAULT_SETTINGS_COLOR
+  })
+
+
+}
+
+function refreshPlayerList() {
+  $('div.player_list').empty();
+  PLAYER_REQUEST.open('GET', '/getPlayerList');
+  PLAYER_REQUEST.send();
+}
+
 function setPlayerListUI(row, i) {
   var playerListContainer = row.insertCell(i);
   playerListContainer.style.verticalAlign = "bottom";
+  var refresh_player_button = document.createElement("button");
+  refresh_player_button.style.width = DIV_PLAYER_LIST_WIDTH + "px";
+  refresh_player_button.innerText = "Refresh player list";
+  refresh_player_button.onclick = function () {
+    refreshPlayerList()
+  };
+  playerListContainer.appendChild(refresh_player_button);
+
   DIV_PLAYER_LIST_DISPLAY = document.createElement("div");
-  DIV_PLAYER_LIST_DISPLAY.style.width = DIV_PLAYER_LIST_WIDTH + "px";
-  DIV_PLAYER_LIST_DISPLAY.style.height = DIV_PLAYER_LIST_HEIGHT + "px";
-  DIV_PLAYER_LIST_DISPLAY.style.background = "white";
+  DIV_PLAYER_LIST_DISPLAY.className = "player_list";
   if (NAME_CURRENT_PLAYER === "") {
     var textForm = document.createElement("form");
     textForm.setAttribute("action", "");
@@ -26,19 +54,20 @@ function setPlayerListUI(row, i) {
     DIV_PLAYER_LIST_DISPLAY.style.opacity = "75%";
   }
   playerListContainer.appendChild(DIV_PLAYER_LIST_DISPLAY);
-  // getAllPlayersList();
+  $('div.player_list').css({
+    width: DIV_PLAYER_LIST_WIDTH + "px",
+    height: DIV_PLAYER_LIST_HEIGHT + "px",
+    background: "White",
+    color: "Black",
+    overflow: "hidden scroll"
+  })
+  refreshPlayerList();
 }
 
 function setChatUI(row, i) {
   var chatList = row.insertCell(i);
-  // chatList.style.color = "Black";
   DIV_CHAT_LIST_DISPLAY = document.createElement("div");
-  // DIV_CHAT_LIST_DISPLAY.style.height =
-  //   window.innerHeight - INPUT_CHAT_HEIGHT - GAP_WIDTH + "px";
-  // DIV_CHAT_LIST_DISPLAY.style.width = INPUT_CHAT_WIDTH + "px";
-  // DIV_CHAT_LIST_DISPLAY.style.background = "white";
   DIV_CHAT_LIST_DISPLAY.className = "message_holder";
-  // DIV_CHAT_LIST_DISPLAY.setAttribute("autocomplete", "off");
   chatList.appendChild(DIV_CHAT_LIST_DISPLAY);
   $('div.message_holder').css({
     background: 'White',
@@ -48,7 +77,7 @@ function setChatUI(row, i) {
     color: "Black",
     autocomplete: 'off'
   });
-  DIV_CARD_LIST_DISPLAY.setAttribute("style", "overflow: hidden scroll");
+  DIV_CHAT_LIST_DISPLAY.setAttribute("style", "overflow: hidden scroll");
 
   var textForm = document.createElement("form");
   textForm.setAttribute("action", "");
@@ -80,8 +109,7 @@ function freeDuelDisplay() {
   var row = t.insertRow(0);
   setChatUI(row, 0);
   setPlayerListUI(row, 1);
-
-  // setThirdColumn(row, 2);
+  setDuelSettingsUI(row, 2);
   // setFourthColumn(row, 3);
   // displayDatabaseLetters();
 }
@@ -106,6 +134,24 @@ PLAYER_REQUEST.onload = function () {
       DIV_NOTIFICATION.innerText = "Duplicate name detected: " + json["files"];
       DIV_NOTIFICATION.style.display = "unset";
       DIV_NOTIFICATION.style.animation = "fadeInOut " + NOTIFICATION_FADE_TIME + "s";
+    } else if (json["code"] == GET_PLAYER_LIST) {
+      var duelists = json["files"];
+      for (i = 0; i < duelists.length; i++) {
+        if (NAME_CURRENT_PLAYER !== duelists[i]) {
+          $('div.player_list').append('<div class="other_duelist" style="border:black; border-radius:2px;">' + duelists[i] + '</div>')
+        }
+      }
+      $('div.other_duelist').on({
+        mouseenter: function (e) {
+          SELECTED_DUELIST = e.target.innerText;
+          e.target.style.borderStyle = "solid";
+        },
+        mouseout: function (e) {
+          SELECTED_DUELIST = "";
+          e.target.style.borderStyle = "none";
+        },
+        click: function () {}
+      })
     }
   }
 }
@@ -116,12 +162,12 @@ SOCKET.on('send_message_client', function (msg) {
   }
   console.log($('div.message_holder').children().length)
   if (typeof msg.sender !== 'undefined' && typeof msg.message !== 'undefined') {
-    $('div.message_holder').append('<div><b style="color: #000">' + msg.sender + ":" + '</b> ' + msg.message + '</div>')
+    $('div.message_holder').append('<div><b>' + msg.sender + ":" + '</b> ' + msg.message + '</div>')
   }
 });
 
 SOCKET.on('new_player_joined', function (msg) {
   if (typeof msg.new_player !== 'undefined') {
-    $('div.message_holder').append('<div><b style="color: #000">' + msg.new_player + " has joined the lobby." + '</b></div>')
+    $('div.message_holder').append('<div><b>' + msg.new_player + " has joined the lobby." + '</b></div>')
   }
 });

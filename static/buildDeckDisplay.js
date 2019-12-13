@@ -1,10 +1,18 @@
-
+function displayCardDescription(div_element) {
+    div_element.style.width = CARD_DISPLAY_WIDTH + "px";
+    div_element.style.height = CARD_DISPLAY_HEIGHT + "px";
+    div_element.style.position = "absolute";
+    div_element.style.background = DEFAULT_BACKGROUND_COLOR;
+    div_element.style.display = "none";
+}
 
 function setFirstColumn(row, i) {
     var cardDatabase = row.insertCell(i);
     var form = document.createElement("form");
     form.className = "example";
-    form.onsubmit = function () { return false };
+    form.onsubmit = function () {
+        return false
+    };
     cardDatabase.appendChild(form);
     INPUT_SEARCH_BAR = document.createElement("input");
     INPUT_SEARCH_BAR.setAttribute("type", "text");
@@ -47,6 +55,13 @@ function setSecondColumn(row, i) {
 
     IMAGE_CARD_DATABASE_DISPLAY.style.width = IMAGE_CARD_DECK_DISPLAY.style.width = CARD_DISPLAY_WIDTH + "px";
     IMAGE_CARD_DATABASE_DISPLAY.style.height = IMAGE_CARD_DECK_DISPLAY.style.height = CARD_DISPLAY_HEIGHT + "px";
+    var cardlistDescription = document.createElement("div");
+    var decklistDescription = document.createElement("div");
+    decklistDescription.style.top = CARD_DISPLAY_HEIGHT + "px";
+    displayCardDescription(cardlistDescription);
+    displayCardDescription(decklistDescription);
+    display.appendChild(cardlistDescription);
+    display.appendChild(decklistDescription);
 }
 
 function buildMenuOptionButton(btn, id, func, text) {

@@ -42,14 +42,6 @@ DUEL_REQUEST.onload = async function () {
             DUEL_REQUEST.send();
         } else if (json["code"] == REGISTER_PLAYER_FAIL) {
             alert("Player did not successfully registered. Please try another name.")
-        } else if (json["code"] == GET_PLAYER_LIST) {
-            DUELISTS = json["files"];
-            for (i = 0; i < DUELISTS.length; i++) {
-                if (PLAYER_NAME !== DUELISTS[i]) {
-                    var d = initPlayerList(DUELISTS[i]);
-                    PLAYER_LIST.appendChild(d);
-                }
-            }
         } else if (json["code"] == ASK_DUEL_PERMISSION_REQUEST) {
 
         } else if (json["code"] == DUELIST_NOT_FOUND) {
@@ -78,13 +70,6 @@ async function savePlayerName() {
     })
 }
 
-function refreshPlayerList() {
-    while (PLAYER_LIST.firstChild) {
-        PLAYER_LIST.removeChild(PLAYER_LIST.firstChild);
-    }
-    DUEL_REQUEST.open('GET', '/getListofPlayers');
-    DUEL_REQUEST.send();
-}
 
 function askDuelPermission() {
     QUESTION_TEXT.innerText = "Ask for duel?"

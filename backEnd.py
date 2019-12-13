@@ -85,16 +85,17 @@ def broadcastPlayer(json, methods=['GET', 'POST']):
     socketio.emit('new_player_joined', json)
 
 
-## EDITING BEYOND THIS POINT ##
-
-
-@app.route('/getListofPlayers')
-def getListofPlayers():
+@app.route('/getPlayerList')
+def getPlayerList():
     global REQUEST_CODES
     global PLAYER_LIST
 
     files = list(PLAYER_LIST.keys())
+    print(files)
     return jsonify(code=REQUEST_CODES["GET_PLAYER_LIST"], files=files)
+
+
+## EDITING BEYOND THIS POINT ##
 
 
 @socketio.on('askPermissionForDuel')
