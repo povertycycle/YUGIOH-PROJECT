@@ -135,7 +135,7 @@ var SELECTED_DECK_NAME;
 
 var NAME_CURRENT_PLAYER = "";
 
-
+var SOCKET = io.connect("http://" + document.domain + ":" + location.port);
 
 
 
@@ -167,7 +167,6 @@ var DECK_CARD_LIST_HEIGHT = 25;
 var NEW_DECK_HEIGHT = 25;
 var DECK_LIST_HEIGHT = 1000;
 
-var SOCKET = io.connect("http://" + document.domain + ":" + location.port);
 
 var GET_PLAYER_LIST = 302;
 
