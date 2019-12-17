@@ -54,6 +54,7 @@ function setPlayerListUI(row, i) {
     DIV_PLAYER_LIST_DISPLAY.style.opacity = "75%";
   }
   playerListContainer.appendChild(DIV_PLAYER_LIST_DISPLAY);
+  console.log($('div.player_list'));
   $('div.player_list').css({
     width: DIV_PLAYER_LIST_WIDTH + "px",
     height: DIV_PLAYER_LIST_HEIGHT + "px",
@@ -77,7 +78,6 @@ function setChatUI(row, i) {
     color: "Black",
     autocomplete: 'off'
   });
-  DIV_CHAT_LIST_DISPLAY.setAttribute("style", "overflow: hidden scroll");
 
   var textForm = document.createElement("form");
   textForm.setAttribute("action", "");
@@ -150,7 +150,9 @@ PLAYER_REQUEST.onload = function () {
           SELECTED_DUELIST = "";
           e.target.style.borderStyle = "none";
         },
-        click: function () {}
+        click: function (e) {
+          challengeToDuel(e.target.innerText);
+        }
       })
     }
   }
