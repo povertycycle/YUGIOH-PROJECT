@@ -135,9 +135,8 @@ var NAME_CURRENT_PLAYER = "";
 
 var HOST = location.origin.replace(/^http/, 'ws')
 var SOCKET = new WebSocket(HOST);
-console.log(SOCKET)
-var testsocket = io.connect("http://" + document.domain + ":" + location.port);
-console.log(testsocket)
+var testsocket = io.connect("http://" + document.domain + (location.port == "" ? '': ":" + location.port));
+
 
 
 
