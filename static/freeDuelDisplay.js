@@ -1,5 +1,12 @@
-function challengeToDuel() {
-
+function challengeToDuel(target) {
+  DIV_TEXT_QUESTION.innerText = "Do you want to challenge " + target + "?";
+  DIV_POPUP_PERMISSION.style.display = "unset";
+  BUTTON_YES.onclick = function () {
+    DIV_POPUP_PERMISSION.style.display = "none";
+  };
+  BUTTON_NO.onclick = function () {
+    DIV_POPUP_PERMISSION.style.display = "none";
+  };
 }
 
 function setDuelSettingsUI(row, i) {
