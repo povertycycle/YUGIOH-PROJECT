@@ -1,1 +1,1 @@
-web: gunicorn --worker-class socketio --log-file=- backEnd:app
+web: gunicorn backEnd:app
