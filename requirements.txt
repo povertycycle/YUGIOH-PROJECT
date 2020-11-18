@@ -2,7 +2,7 @@ asn1crypto==0.24.0
 autopep8==1.5.4
 cffi==1.12.2
 Click==7.0
-cryptography==2.6.1
+cryptography==3.2
 cycler==0.10.0
 Flask==1.0.3
 Flask-SocketIO==0.6.0
