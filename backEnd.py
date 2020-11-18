@@ -10,9 +10,17 @@ app = Flask(__name__)
 app.config['SECRET_KEY'] = 'vnkbjafhknrl1532#'
 socketio = SocketIO(app)
 
-global REQUEST_CODES
-global PLAYER_LIST
-global PLAYER_IP_LIST
+PLAYER_LIST = {}
+PLAYER_IP_LIST = {}
+
+REQUEST_CODES = {
+    "ALL_LOCAL_DECKS": 100,
+    "DECK_SAVED": 101,
+    "DECK_RENAMED": 102,
+    "REGISTER_PLAYER_SUCCESS": 300,
+    "REGISTER_PLAYER_DUPLiCATE_NAME": 301,
+    "GET_PLAYER_LIST": 302,
+}
 
 
 @app.route('/')
@@ -64,7 +72,6 @@ def registerNewPlayer(player_name):
     global REQUEST_CODES
     global PLAYER_LIST
 
-    print(PLAYER_LIST)
     playerNames = PLAYER_LIST.keys()
     if player_name in playerNames:
         return jsonify(code=REQUEST_CODES["REGISTER_PLAYER_DUPLiCATE_NAME"],
@@ -114,17 +121,6 @@ def prepareDuel(json, methods=['GET', 'POST']):
 
 
 if __name__ == '__main__':
-    PLAYER_LIST = {}
-    PLAYER_IP_LIST = {}
-
-    REQUEST_CODES = {
-        "ALL_LOCAL_DECKS": 100,
-        "DECK_SAVED": 101,
-        "DECK_RENAMED": 102,
-        "REGISTER_PLAYER_SUCCESS": 300,
-        "REGISTER_PLAYER_DUPLiCATE_NAME": 301,
-        "GET_PLAYER_LIST": 302,
-    }
     # FILENAME = "http://localhost:5000/"
     # webbrowser.open_new_tab(FILENAME)
     
