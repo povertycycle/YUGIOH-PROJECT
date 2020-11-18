@@ -1,1 +1,1 @@
-web: python backEnd.py runserver 0.0.0.0:5000
+web: gunicorn --worker-class socketio.sgunicorn.GeventSocketIOWorker --log-file=- backEnd:app

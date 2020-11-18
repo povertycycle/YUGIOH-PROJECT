@@ -131,5 +131,5 @@ if __name__ == '__main__':
     }
     # FILENAME = "http://localhost:5000/"
     # webbrowser.open_new_tab(FILENAME)
-    PORT = process.env.PORT
-    socketio.run(app).listen(PORT)
+    
+    socketio.run(app)
