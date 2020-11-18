@@ -10,7 +10,6 @@ app = Flask(__name__)
 app.config['SECRET_KEY'] = 'vnkbjafhknrl1532#'
 socketio = SocketIO(app)
 
-global FILENAME
 global REQUEST_CODES
 global PLAYER_LIST
 global PLAYER_IP_LIST
@@ -65,6 +64,7 @@ def registerNewPlayer(player_name):
     global REQUEST_CODES
     global PLAYER_LIST
 
+    print(PLAYER_LIST)
     playerNames = PLAYER_LIST.keys()
     if player_name in playerNames:
         return jsonify(code=REQUEST_CODES["REGISTER_PLAYER_DUPLiCATE_NAME"],
@@ -114,10 +114,6 @@ def prepareDuel(json, methods=['GET', 'POST']):
 
 
 if __name__ == '__main__':
-    global FILENAME
-    global REQUEST_CODES
-    global PLAYER_LIST
-
     PLAYER_LIST = {}
     PLAYER_IP_LIST = {}
 
