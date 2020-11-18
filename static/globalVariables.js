@@ -133,8 +133,11 @@ var SELECTED_CARD;
 var SELECTED_DUELIST;
 var NAME_CURRENT_PLAYER = "";
 
-var SOCKET = io.connect("http://" + document.domain + ":" + location.port);
-
+var HOST = location.origin.replace(/^http/, 'ws')
+var SOCKET = new WebSocket(HOST);
+console.log(SOCKET)
+var testsocket = io.connect("http://" + document.domain + ":" + location.port);
+console.log(testsocket)
 
 
 
