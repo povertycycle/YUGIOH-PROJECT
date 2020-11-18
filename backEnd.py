@@ -82,7 +82,7 @@ def registerNewPlayer(player_name):
                        files=player_name)
 
 
-@socketio.on('send_message')
+@socketio.on('/submit')
 def receiveMessage(json, methods=['GET', 'POST']):
     socketio.emit('send_message_client', json)
 
@@ -100,7 +100,7 @@ def getPlayerList():
     print(files)
     return jsonify(code=REQUEST_CODES["GET_PLAYER_LIST"], files=files)
 
-
+ 
 ## EDITING BEYOND THIS POINT ##
 
 
