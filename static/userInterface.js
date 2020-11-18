@@ -128,7 +128,7 @@ function goToDuelInterface() {
     })
 }
 
-SOCKET.on('broadcastPlayer', function (msg) {
+SOCKET.on('broadcast_player', function (msg) {
     if (typeof msg.user_name !== 'undefined' && typeof msg.message !== 'undefined') {
         if (msg.user_name !== PLAYER_NAME)
             alert(msg.message + msg.user_name + " is now connected! Be wary!");

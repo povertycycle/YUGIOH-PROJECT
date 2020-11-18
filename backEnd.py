@@ -88,7 +88,6 @@ def receiveMessage(json, methods=['GET', 'POST']):
 
 @socketio.on('broadcast_player')
 def broadcastPlayer(json, methods=['GET', 'POST']):
-    print("EMITTING ")
     socketio.emit('new_player_joined', json)
 
 
