@@ -99,6 +99,7 @@ function setChatUI(row, i) {
   chatList.appendChild(textForm);
   textForm.onsubmit = function (e) {
     e.preventDefault();
+    console.log($('.input.message').val())
     SOCKET.emit('send_message', {
       sender: NAME_CURRENT_PLAYER,
       message: $('input.message').val()
