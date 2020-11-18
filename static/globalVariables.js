@@ -134,8 +134,33 @@ let SELECTED_DUELIST;
 let NAME_CURRENT_PLAYER = "";
 
 let SOCKET = io.connect("http://" + document.domain + (location.port == "" ? '': ":" + location.port));
-
-
+if (window.location.protocol == "https:") {
+    let ws_scheme = "wss://";
+  } else {
+    let ws_scheme = "ws://"
+  };
+  var inbox = new ReconnectingWebSocket(ws_scheme + location.host + "/receive");
+  var outbox = new ReconnectingWebSocket(ws_scheme + location.host + "/submit");
+  
+  inbox.onmessage = function(message) {
+    var data = JSON.parse(message.data);
+    $(".message_holder").append(
+        "<div class='panel panel-default'><div class='panel-heading'>" + 
+        "</div><div class='panel-body'>" + 
+        $('<span/>').text(data.text).html() + 
+        "</div></div>"
+    );
+  };
+  
+  inbox.onclose = function(){
+      console.log('inbox closed');
+      this.inbox = new WebSocket(inbox.url);
+  };
+  
+  outbox.onclose = function(){
+      console.log('outbox closed');
+      this.outbox = new WebSocket(outbox.url);
+  };
 
 
 

@@ -103,10 +103,7 @@ function setChatUI(row, i) {
   }
   textForm.onsubmit = function (e) {
     e.preventDefault();
-    SOCKET.emit('send_message', {
-      sender: NAME_CURRENT_PLAYER,
-      message: sendmsg
-    })
+    outbox.send(JSON.stringify({ text: sendmsg }));
     $('input.message').val('').focus()
   };
   if (NAME_CURRENT_PLAYER === "") {
