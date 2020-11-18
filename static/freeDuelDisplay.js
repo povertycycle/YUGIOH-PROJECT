@@ -97,9 +97,13 @@ function setChatUI(row, i) {
   chatInput.style.height = INPUT_CHAT_HEIGHT + "px";
   textForm.appendChild(chatInput);
   chatList.appendChild(textForm);
+  let sendmsg = '';
+  chatInput.oninput = function (e) {
+    sendmsg = e.target.value;
+  }
   textForm.onsubmit = function (e) {
     e.preventDefault();
-    console.log($('.input.message').val())
+    console.log(sendmsg)
     SOCKET.emit('send_message', {
       sender: NAME_CURRENT_PLAYER,
       message: $('input.message').val()
